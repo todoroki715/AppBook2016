@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+	<display-name>AppBook2017</display-name>
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.LoginTopServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChangePass</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.ChangePassServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangePass</servlet-name>
+		<url-pattern>/changepass.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChangePassComp</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.ChangePassCompServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangePassComp</servlet-name>
+		<url-pattern>/changepasscomp.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.LoginOutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/logout.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Menu</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.MenuServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Menu</servlet-name>
+		<url-pattern>/menu.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LenBookList</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.LenBookListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LenBookList</servlet-name>
+		<url-pattern>/lenBookList.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LenInput</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.LenInputServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LenInput</servlet-name>
+		<url-pattern>/lenInputBook.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LenRegBook</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.LenRegServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LenRegBook</servlet-name>
+		<url-pattern>/lenRegBook.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>HisBookList</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.HisBookListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HisBookList</servlet-name>
+		<url-pattern>/hisBookList.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RenInputBook</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.RenInputServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RenInputBook</servlet-name>
+		<url-pattern>/renInputBook.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RetUpdate</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.RetUpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetUpdate</servlet-name>
+		<url-pattern>/retUpdBook.do</url-pattern>
+	</servlet-mapping>
+</web-app>
