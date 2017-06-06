@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import jp.co.trans.tech.formbean.ChangePassFormBean;
 import jp.co.trans.tech.formbean.ErrorFormBean;
+import jp.co.trans.tech.utilities.Utilities_common;
 
 public class ChangePassCompServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,7 +28,15 @@ public class ChangePassCompServlet extends HttpServlet{
 
 		try{
 			ChangePassFormBean changePassForm = (ChangePassFormBean) session.getAttribute("changePassForm");
+			String accountId = request.getParameter("accountId");
+			String pass = request.getParameter("pass");
+			String changePass = request.getParameter("changePass");
+			String comgPass = request.getParameter("comgPass");
 
+			if(Utilities_common.check_accountId(accountId) == false){
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePassComp.jsp");
+				dispatch.forward(request, response);
+			}
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePassComp.jsp");
 			dispatch.forward(request, response);
 		}catch (Exception e) {
