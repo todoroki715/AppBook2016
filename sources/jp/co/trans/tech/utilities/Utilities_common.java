@@ -11,12 +11,16 @@ public class Utilities_common {
 		return true;
 	}
 	public static boolean checkNumeric(String str){
-		//if()
+		if(str.length() != str.getBytes().length){
+			return false;
+		}
 
 		return true;
 	}
 	public static boolean checkLength(String str){
-		//if()
+		if(str.length() != 6){
+			return false;
+		}
 
 		return true;
 	}

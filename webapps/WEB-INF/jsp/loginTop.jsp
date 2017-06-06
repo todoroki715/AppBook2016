@@ -64,7 +64,6 @@ table.BT{
 					<th>パスワード:</th>
 					<th><input type="password" name="pass" maxlength='20'/></th>
 				</tr>
-
 			</table>
 			<table class="BT">
 				<tr>

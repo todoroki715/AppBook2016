@@ -14,7 +14,9 @@ import jp.co.trans.tech.formbean.ErrorFormBean;
 import jp.co.trans.tech.formbean.LoginTopFormBean;
 import jp.co.trans.tech.service.EmployeeService;
 import jp.co.trans.tech.utilities.Utilities_common;
+
 public class MenuServlet extends HttpServlet{
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException{
 
@@ -28,6 +30,7 @@ public class MenuServlet extends HttpServlet{
 			HttpSession session = request.getSession();
 
 			try{
+
 				LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
 				String accountId = request.getParameter("accountId");
 				String pass = request.getParameter("pass");
@@ -45,12 +48,12 @@ public class MenuServlet extends HttpServlet{
 				if(num == 0){
 					RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 					dispatch.forward(request, response);
-
 				}
 				EmployeeDto Dto = Employee.doSelectPrimay(accountId);
 				LoginTopForm.setaccountId(Dto.getaccountId());
 				LoginTopForm.setaccountName(Dto.getaccountName());
 				LoginTopForm.setmasterFlg(Dto.getmasterFlg());
+
 				session.setAttribute("GREETING_NAME","こんにちは！" + LoginTopForm.getaccountName() + "さん");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");
 				dispatch.forward(request, response);
