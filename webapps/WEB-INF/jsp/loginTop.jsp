@@ -4,30 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="./css/Login.css" type="text/css">
 <title>ログイントップ</title>
-<style>
-div.loginform{
-	background:#ffffff;
-	width: 500px;
-	padding: 50px;
-	text-align: center;
-	border: 1px solid #000000;
-	margin:30px auto;
-}
-div.pass{
-	width: 500px;
-	text-align: right;
-	margin:10px auto;
-}
-table.input{
-	text-align: left;
-	width: 600px;
-	margin-bottom:10px;
-}
-table.BT{
-	margin-left:400px;
-}
-</style>
 
 </head>
 
@@ -53,29 +31,30 @@ table.BT{
 
 <body>
 	<form name='form'>
-		<div align="center" class="loginform">
+		<div class="loginform">
 			<h3>ログインID/パスワードを入力してログインしてください。</h3>
+			<font color="ff0000"><jsp:getProperty property="errorMsg" name="loginTopForm"/></font>
 			<table class="input">
 				<tr>
-					<th>ログインID:</th>
-					<th><input type="text" name="accountId" maxlength='6'/></th>
+					<th>ログインID&nbsp;:&nbsp;</th>
+					<th><input style="width:100px" type="text" name="accountId" maxlength='6'/></th>
 				</tr>
 				<tr>
-					<th>パスワード:</th>
-					<th><input type="password" name="pass" maxlength='20'/></th>
+					<th>パスワード&nbsp;:&nbsp;</th>
+					<th><input style="width:150px" type="password" name="pass" maxlength='20'/></th>
 				</tr>
 			</table>
 			<table class="BT">
 				<tr>
-					<th><input type="submit" name="loginBT" value="ログイン" onclick='login()'/></th>
-					<th><input type="button" name="clearBT" value="クリア" onclick ='IdPassclear()'/></th>
+					<th><input class="botton" type="submit" name="loginBT" value="ログイン" onclick='login()'/></th>
+					<th><input class="botton" type="button" name="clearBT" value="クリア" onclick ='IdPassclear()'/></th>
 				</tr>
 			</table>
 			<input type="hidden" name="vmode" value="LOGIN"/>
 		</div>
 
-		<div align="center" class="pass">
-			<input type="submit" name="changeBT" value="パスワード変更" onclick='change()'/>
+		<div class="pass">
+			<input class="changeBT" type="submit" name="changeBT" value="パスワード変更" onclick='change()'/>
 		</div>
 	</form>
 </body>

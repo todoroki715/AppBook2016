@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+html,body{
+	height:100%;
+	width:100%;
+}
+.loginform{
+	background:#ffffff;
+	width:55%;
+	height:40%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+	border: 1px solid #000000;
+}
+
+.input{
+	text-align: left;
+	margin-left:auto;
+	margin-right: auto;
+}
+.pass{
+	background:#ffffff;
+	width:10%;
+	height:5%;
+	margin-left: 65%;
+	margin-right: 25%;
+	margin-top: 1%;
+}
+.BT{
+	width:10%;
+	margin-left: 47%;
+	margin-right: 43%;
+	padding-bottom:10%;
+}
+.botton{
+	width:160px;
+	height:50px;
+	font-size:26px;
+	border: 1px solid #000000;
+}
+.changeBT{
+	width:160px;
+	height:50px;
+	font-size:20px;
+	border: 1px solid #000000;
+}

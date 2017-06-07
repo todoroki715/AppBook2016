@@ -15,57 +15,153 @@ import jp.co.trans.tech.formbean.LoginTopFormBean;
 import jp.co.trans.tech.service.EmployeeService;
 import jp.co.trans.tech.utilities.Utilities_common;
 
+/*@MenuServletクラス
+ * ログイン機能や情報所得を実施する
+ * メニュー画面へのディスパッチ処理も行う
+ */
+
 public class MenuServlet extends HttpServlet{
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException{
 
-			RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");
+	/*@void doGet(HttpServletRequest, HttpServletResponse)
+	 * URL直打ちでアクセスされた場合の処理
+	 * ログイン画面にディスパッチする
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException{
+
+		RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");
+		dispatch.forward(request, response);
+	}
+
+
+	/*@void doPost(HttpServletRequest, HttpServletResponse)
+	 * リンクからアクセスされた場合の処理
+	 * セッションを取りセッションからLoginTopFormBeanオブジェクトを所得する
+	 * 所得したオブジェクトからアカウントIDとパスワードを所得する
+	 * その後チェック処理を通る
+	 * チェック処理を通った後にIDとパスワードをデータベースから検索
+	 * 存在した場合ログイン処理を続けてメニュー画面に移行する
+	 *
+	 * チェックで異常があったり
+	 * 			IDやパスワードに異常があればエラーを出す。
+	 * そしてログイン画面に移行する
+	 *
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+		    throws IOException, ServletException{
+
+		HttpSession session = request.getSession();
+
+		try{
+
+
+			LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
+
+			//所得したパラメータからIDとパスワードを所得する
+			String accountId = request.getParameter("accountId");
+			String pass = request.getParameter("pass");
+
+			//IDが設定されているか確認
+			if(Utilities_common.checkIndispensable(accountId) == false){
+				LoginTopForm.seterrorMsg("ログインIDが未設定です");
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
+
+			//IDが数値かどうか確認する
+			if(Utilities_common.checkNumeric(accountId) == false){
+				LoginTopForm.seterrorMsg("ログインIDは半角数字で設定してください");
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
+
+			//IDが6桁であるか確認する
+			if(Utilities_common.checkLength(accountId) == false){
+				LoginTopForm.seterrorMsg("ログインIDは、6桁で設定してください");
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
+
+			//パスワードが設定されているか確認
+			if(Utilities_common.checkIndispensable(pass) == false){
+				LoginTopForm.seterrorMsg("パスワードが未設定です");
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
+
+			//パスワードが半角英数字か確認する
+			if(Utilities_common.checkAlphanumeric(pass) == false){
+				LoginTopForm.seterrorMsg("パスワードは半角英数字で設定してください");
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
+
+			//パスワードが3文字以上20文字以下か確認する
+			if(Utilities_common.checkLengthLowHigh(pass) == false){
+				LoginTopForm.seterrorMsg("パスワードは3～20桁の範囲で設定してください");
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
+
+			//データ保存用にインスタンス生成
+			EmployeeService Employee = new EmployeeService();
+
+			//データが存在するか確認
+			int num = Employee.doSelectCount(accountId,pass);
+
+			//所得できなかったらエラーを出してディスパッチ処理
+			if(num == 0){
+				LoginTopForm.seterrorMsg("ログインID、パスワードに誤りがあるか、利用できないアカウントです");
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
+
+			//ログイン情報所得
+			EmployeeDto Dto = Employee.doSelectPrimay(accountId);
+
+			if(Dto.getaccountId() == null){
+				LoginTopForm.seterrorMsg("ログイン者の情報を確認できませんでした");
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
+
+			//ログイン情報保存
+			LoginTopForm.setAccountId(Dto.getaccountId());
+			LoginTopForm.setaccountName(Dto.getaccountName());
+			LoginTopForm.setmasterFlg(Dto.getmasterFlg());
+
+			//ログイン挨拶文字列格納
+			session.setAttribute("GREETING_NAME","こんにちは！" + LoginTopForm.getaccountName() + "さん");
+
+			//ディスパッチ処理（メニュー画面に移行）
+			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");
+			dispatch.forward(request, response);
+
+
+		/*@例外処理
+		 * ErrorFormBeanインスタンスを生成し例外のメッセージを設定する
+		 * その後生成したインスタンスをセッションに格納する
+		 * 最後にエラー画面へディスパッチ処理を行う
+		 */
+		}catch (Exception e) {
+			ErrorFormBean ErrorForm = new ErrorFormBean();
+			ErrorForm.setErrorMsg(e.getMessage());
+			session.setAttribute("errorForm", ErrorForm);
+			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/error1.jsp");
 			dispatch.forward(request, response);
 		}
 
-		protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			    throws IOException, ServletException{
 
-			HttpSession session = request.getSession();
-
-			try{
-
-				LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
-				String accountId = request.getParameter("accountId");
-				String pass = request.getParameter("pass");
-				LoginTopForm.setaccountId(accountId);
-				if(Utilities_common.checkIndispensable(accountId) == false){
-					RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");
-					dispatch.forward(request, response);
-				}
-				/*
-				if(Utilities_common.checkNumeric(accountId)){
-
-				}*/
-				EmployeeService Employee = new EmployeeService();
-				int num = Employee.doSelectCount(accountId,pass);
-				if(num == 0){
-					RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
-					dispatch.forward(request, response);
-				}
-				EmployeeDto Dto = Employee.doSelectPrimay(accountId);
-				LoginTopForm.setaccountId(Dto.getaccountId());
-				LoginTopForm.setaccountName(Dto.getaccountName());
-				LoginTopForm.setmasterFlg(Dto.getmasterFlg());
-
-				session.setAttribute("GREETING_NAME","こんにちは！" + LoginTopForm.getaccountName() + "さん");
-				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");
-				dispatch.forward(request, response);
-			}catch (Exception e) {
-				ErrorFormBean ErrorForm = new ErrorFormBean();
-				session.setAttribute("errorForm", ErrorForm);
-				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/error1.jsp");
-				dispatch.forward(request, response);
-			}
-
-
-		}
+	}
 
 
 }
