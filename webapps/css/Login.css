@@ -5,12 +5,12 @@ html,body{
 }
 .loginform{
 	background:#ffffff;
-	width:55%;
-	height:40%;
+	width:640px;
+	height:220px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 5%;
+	margin-top: 10%;
 	border: 1px solid #000000;
 }
 
@@ -23,8 +23,8 @@ html,body{
 	background:#ffffff;
 	width:10%;
 	height:5%;
-	margin-left: 65%;
-	margin-right: 25%;
+	margin-left: 57%;
+	margin-right: 33%;
 	margin-top: 1%;
 }
 .BT{

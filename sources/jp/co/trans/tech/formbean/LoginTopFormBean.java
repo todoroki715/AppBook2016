@@ -18,6 +18,7 @@ public class LoginTopFormBean {
 	//管理者フラグ
 	private int masterFlg = 0;
 
+
 	//エラーメッセージをセットする
 	public void seterrorMsg(String errorMsg){
 		this.errorMsg = errorMsg;

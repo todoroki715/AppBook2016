@@ -58,7 +58,7 @@ input.backBT{
 			</tr>
 			<tr>
 				<th>確認パスワード</th>
-				<th><input type="password" name="confPass" maxlength='20'/></th>
+				<th><input type="password" name="comfPass" maxlength='20'/></th>
 			</tr>
 			</table>
 			<input type="hidden" name="vmode" value="PASS"/>

@@ -27,6 +27,7 @@ public class EmployeeService {
 		ResultSet rs = null;
 		Connection con = null;
 		Statement state = null;
+		int count = 0;
 		try{
 			//コネクションを所得しステートメントも所得する
 			con = Conection ();
@@ -46,16 +47,15 @@ public class EmployeeService {
 			//SQLを実行しその結果を保存する
 			rs = state.executeQuery(sb.toString());
 
-			int count = 0;
-
 			//データが取れているか確認しあれば保存する
 			while(rs.next()){
 				count = rs.getInt("cnt");
 			}
-			return count;
+
 		}finally{
 			closeSet(con, state, rs);
 		}
+		return count;
 	}
 
 	/*@EmployeeDto doSelectPrimay(String)
@@ -89,15 +89,51 @@ public class EmployeeService {
 			rs = state.executeQuery(sb.toString());
 
 			//データがあるか確認して、あればアカウントのデータを所得する
-			rs.next();
-			Employee.setaccountId(rs.getString("ACCOUNT_ID"));
-			Employee.setaccountName(rs.getString("ACCOUNT_NAME"));
-			Employee.setlendFlg(rs.getInt("LEND_FLG"));
-			Employee.setmasterFlg(rs.getInt("MASTER_FLG"));
+			if(rs.next() == true){
+				Employee.setaccountId(rs.getString("ACCOUNT_ID"));
+				Employee.setaccountName(rs.getString("ACCOUNT_NAME"));
+				Employee.setlendFlg(rs.getInt("LEND_FLG"));
+				Employee.setmasterFlg(rs.getInt("MASTER_FLG"));
+			}else{
+				Employee.setaccountId(null);
+				Employee.setaccountName(null);
+				Employee.setlendFlg(0);
+				Employee.setmasterFlg(0);
+			}
 
-			return Employee;
 		}finally{
 
+			closeSet(con, state, rs);
+		}
+		return Employee;
+	}
+	public boolean doUpdatePass(String accountId, String pass) throws SQLException, NamingException{
+		ResultSet rs = null;
+		Connection con = null;
+		Statement state = null;
+		try{
+			//コネクションを所得しステートメントも所得する
+			con = Conection ();
+			state = con.createStatement();
+
+			//SQL文作成
+			StringBuilder sb = new StringBuilder();
+			sb.append("UPDATE EMP_MST ");
+			sb.append("SET ");
+			sb.append("PASS = '"+pass+"' ");
+			sb.append("UPDATE_DATE = SYSDATE ");
+			sb.append("WHERE ");
+			sb.append("ACCOUNT_ID = '"+accountId+"'");
+
+			//SQLを実行しその結果を保存する
+			rs = state.executeQuery(sb.toString());
+
+			return true;
+		}catch (SQLException e) {
+			con.rollback();
+			throw e;
+		}
+		finally{
 			closeSet(con, state, rs);
 		}
 	}
@@ -109,14 +145,14 @@ public class EmployeeService {
 	private void closeSet(Connection con, Statement state, ResultSet rs) throws SQLException {
 
 		//rs,state,conを終了する。
-		if(rs.isClosed() == false){
+		if(rs != null && rs.isClosed() == false){
 			rs.close();
 		}
-		if(state.isClosed() == false){
+		if(state != null && state.isClosed() == false){
 			state.close();
 		}
 
-		if(con.isClosed() == false){
+		if(con != null && con.isClosed() == false){
 			con.close();
 		}
 	}
@@ -128,6 +164,7 @@ public class EmployeeService {
 
 		InitialContext context = new InitialContext();
 		DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/OracleC");
+		//DataSource ds = (DataSource)context.lookup("");
 		Connection con = ds.getConnection();
 
 
@@ -135,6 +172,7 @@ public class EmployeeService {
 		con.setAutoCommit(false);
 
 		return con;
+
 
 	}
 }

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
  * 主にチェック処理等を行いチェック結果を返却する
  */
 
-public class Utilities_common {
+public class Utilities {
 
 
 	/* @boolean checkIndispensable(String)
@@ -17,7 +17,6 @@ public class Utilities_common {
 		if(StringUtils.isBlank(str)){
 			return false;
 		}
-
 		return true;
 	}
 
@@ -49,24 +48,24 @@ public class Utilities_common {
 
 	/* @boolean CheckAlphanumeric(String)
 	 * 文字列が半角英数字か判定する
-	 * 文字列としての長さとバイトの長さの差から判定する
 	 * 半角英数字以外だとfalseを返す
 	 */
 	public static boolean checkAlphanumeric(String str){
-		if(str.length() != str.getBytes().length){
+		if(StringUtils.isAlphanumeric(str) == false){
 			return false;
 		}
 		return true;
+
 	}
 
 
-	/* @boolean CheckAlphanumeric(String)
+	/* @boolean CheckLengthLowHigh(String, int, int)
 	 * 文字列が半角英数字か判定する
 	 * 文字列としての長さとバイトの長さの差から判定する
 	 * 半角英数字以外だとfalseを返す
 	 */
-	public static boolean checkLengthLowHigh(String str){
-		if(str.length() < 3 || str.length() > 20){
+	public static boolean checkLengthLowHigh(String str, int Low, int High){
+		if(str.length() < Low || str.length() > High){
 			return false;
 		}
 

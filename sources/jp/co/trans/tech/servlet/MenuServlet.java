@@ -13,7 +13,7 @@ import jp.co.trans.tech.dto.EmployeeDto;
 import jp.co.trans.tech.formbean.ErrorFormBean;
 import jp.co.trans.tech.formbean.LoginTopFormBean;
 import jp.co.trans.tech.service.EmployeeService;
-import jp.co.trans.tech.utilities.Utilities_common;
+import jp.co.trans.tech.utilities.Utilities;
 
 /*@MenuServletクラス
  * ログイン機能や情報所得を実施する
@@ -22,21 +22,21 @@ import jp.co.trans.tech.utilities.Utilities_common;
 
 public class MenuServlet extends HttpServlet{
 
-
 	/*@void doGet(HttpServletRequest, HttpServletResponse)
-	 * URL直打ちでアクセスされた場合の処理
-	 * ログイン画面にディスパッチする
+	 * get要求でアクセスされた場合の処理
+	 * 承認しないためログイン画面にディスパッチする
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException{
 
 		RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");
 		dispatch.forward(request, response);
+		return;
 	}
 
 
 	/*@void doPost(HttpServletRequest, HttpServletResponse)
-	 * リンクからアクセスされた場合の処理
+	 * post要求でアクセスされた場合の処理
 	 * セッションを取りセッションからLoginTopFormBeanオブジェクトを所得する
 	 * 所得したオブジェクトからアカウントIDとパスワードを所得する
 	 * その後チェック処理を通る
@@ -55,7 +55,6 @@ public class MenuServlet extends HttpServlet{
 
 		try{
 
-
 			LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
 
 			//所得したパラメータからIDとパスワードを所得する
@@ -63,7 +62,7 @@ public class MenuServlet extends HttpServlet{
 			String pass = request.getParameter("pass");
 
 			//IDが設定されているか確認
-			if(Utilities_common.checkIndispensable(accountId) == false){
+			if(Utilities.checkIndispensable(accountId) == false){
 				LoginTopForm.seterrorMsg("ログインIDが未設定です");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
@@ -71,7 +70,7 @@ public class MenuServlet extends HttpServlet{
 			}
 
 			//IDが数値かどうか確認する
-			if(Utilities_common.checkNumeric(accountId) == false){
+			if(Utilities.checkNumeric(accountId) == false){
 				LoginTopForm.seterrorMsg("ログインIDは半角数字で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
@@ -79,7 +78,7 @@ public class MenuServlet extends HttpServlet{
 			}
 
 			//IDが6桁であるか確認する
-			if(Utilities_common.checkLength(accountId) == false){
+			if(Utilities.checkLength(accountId) == false){
 				LoginTopForm.seterrorMsg("ログインIDは、6桁で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
@@ -87,7 +86,7 @@ public class MenuServlet extends HttpServlet{
 			}
 
 			//パスワードが設定されているか確認
-			if(Utilities_common.checkIndispensable(pass) == false){
+			if(Utilities.checkIndispensable(pass) == false){
 				LoginTopForm.seterrorMsg("パスワードが未設定です");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
@@ -95,7 +94,7 @@ public class MenuServlet extends HttpServlet{
 			}
 
 			//パスワードが半角英数字か確認する
-			if(Utilities_common.checkAlphanumeric(pass) == false){
+			if(Utilities.checkAlphanumeric(pass) == false){
 				LoginTopForm.seterrorMsg("パスワードは半角英数字で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
@@ -103,7 +102,7 @@ public class MenuServlet extends HttpServlet{
 			}
 
 			//パスワードが3文字以上20文字以下か確認する
-			if(Utilities_common.checkLengthLowHigh(pass) == false){
+			if(Utilities.checkLengthLowHigh(pass, 3, 20) == false){
 				LoginTopForm.seterrorMsg("パスワードは3～20桁の範囲で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
@@ -146,7 +145,6 @@ public class MenuServlet extends HttpServlet{
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");
 			dispatch.forward(request, response);
 
-
 		/*@例外処理
 		 * ErrorFormBeanインスタンスを生成し例外のメッセージを設定する
 		 * その後生成したインスタンスをセッションに格納する
@@ -156,10 +154,12 @@ public class MenuServlet extends HttpServlet{
 			ErrorFormBean ErrorForm = new ErrorFormBean();
 			ErrorForm.setErrorMsg(e.getMessage());
 			session.setAttribute("errorForm", ErrorForm);
+
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/error1.jsp");
 			dispatch.forward(request, response);
-		}
 
+		}
+		return;
 
 	}
 
