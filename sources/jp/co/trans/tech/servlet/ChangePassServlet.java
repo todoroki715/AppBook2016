@@ -13,6 +13,11 @@ import jp.co.trans.tech.formbean.ChangePassFormBean;
 import jp.co.trans.tech.formbean.ErrorFormBean;
 
 public class ChangePassServlet extends HttpServlet{
+
+	/*@void doGet(HttpServletRequest, HttpServletResponse)
+	 * get要求でアクセスされた場合の処理
+	 * get要求は承認しないためログイン画面に飛ばす
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException{
 
@@ -20,6 +25,12 @@ public class ChangePassServlet extends HttpServlet{
 		dispatch.forward(request, response);
 	}
 
+	/*@void doPost(HttpServletRequest, HttpServletResponse)
+	 * post要求でアクセスされた場合の処理
+	 * セッションを取りChangePassFormBeanオブジェクトを所得する
+	 * もし取れなければインスタンスを生成する
+	 * その後、パスワード変更画面に移行する
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		    throws IOException, ServletException{
 
@@ -29,17 +40,19 @@ public class ChangePassServlet extends HttpServlet{
 			ChangePassFormBean changePassForm = (ChangePassFormBean) session.getAttribute("changePassForm");
 			if(changePassForm == null){
 				changePassForm = new ChangePassFormBean();
-
 			}
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 			dispatch.forward(request, response);
+
 		}catch (Exception e) {
 			ErrorFormBean ErrorForm = new ErrorFormBean();
+			ErrorForm.setErrorMsg(e.getMessage());
 			session.setAttribute("errorForm", ErrorForm);
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/error1.jsp");
 			dispatch.forward(request, response);
 		}
 
+		return;
 
 	}
 
