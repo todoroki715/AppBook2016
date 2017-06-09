@@ -37,8 +37,8 @@ public class Utilities {
 	 * 文字列の長さを判定する
 	 * 6文字以外だとfalseを返す
 	 */
-	public static boolean checkLength(String str){
-		if(str.length() != 6){
+	public static boolean checkLength(String str, int High){
+		if(str.length() != High){
 			return false;
 		}
 

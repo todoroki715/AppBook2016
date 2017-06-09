@@ -24,32 +24,8 @@ public class LoginTopServlet extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException{
-		HttpSession session = request.getSession();
-		try{
-			LoginTopFormBean LoginForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
-			if(LoginForm == null){
-				LoginForm = new LoginTopFormBean();
 
-			}
-			LoginForm.seterrorMsg("");
-			session.setAttribute("loginTopForm", LoginForm);
-
-			this.doPost(request, response);
-		}
-
-
-		/*@例外処理
-		 * ErrorFormBeanインスタンスを生成し例外のメッセージを設定する
-		 * その後生成したインスタンスをセッションに格納する
-		 * 最後にエラー画面へディスパッチ処理を行う
-		 */
-		catch (Exception e) {
-			ErrorFormBean ErrorForm = new ErrorFormBean();
-			ErrorForm.setErrorMsg(e.getMessage());
-			session.setAttribute("errorForm", ErrorForm);
-			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/error1.jsp");
-			dispatch.forward(request, response);
-		}
+		this.doPost(request, response);
 		return;
 	}
 
@@ -70,6 +46,7 @@ public class LoginTopServlet extends HttpServlet{
 				LoginForm = new LoginTopFormBean();
 
 			}
+			LoginForm.seterrorMsg("");
 			session.setAttribute("loginTopForm", LoginForm);
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 			dispatch.forward(request, response);

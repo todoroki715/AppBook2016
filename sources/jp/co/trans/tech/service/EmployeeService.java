@@ -107,6 +107,13 @@ public class EmployeeService {
 		}
 		return Employee;
 	}
+
+
+	/*@boolean doUpdatePass(String, String)
+	 * IDとパスワードを受け取る
+	 * データベースに接続してIDに該当するデータを更新する
+	 * 返り値は更新に成功したかどうか
+	 */
 	public boolean doUpdatePass(String accountId, String pass) throws SQLException, NamingException{
 		ResultSet rs = null;
 		Connection con = null;
@@ -120,16 +127,29 @@ public class EmployeeService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE EMP_MST ");
 			sb.append("SET ");
-			sb.append("PASS = '"+pass+"' ");
+			sb.append("PASS = '"+pass+"', ");
 			sb.append("UPDATE_DATE = SYSDATE ");
 			sb.append("WHERE ");
 			sb.append("ACCOUNT_ID = '"+accountId+"'");
 
 			//SQLを実行しその結果を保存する
-			rs = state.executeQuery(sb.toString());
+			//executeUpdateは更新した行番号を返り値とする
+			int num;
+			num = state.executeUpdate(sb.toString());
+
+			//更新失敗すればfalseを返す
+			if(num == 0){
+				return false;
+			}
+
+			//成功していればコミットする
+			con.commit();
 
 			return true;
+
 		}catch (SQLException e) {
+
+			//エラーがあればロールバックして、exceptionをスローする
 			con.rollback();
 			throw e;
 		}

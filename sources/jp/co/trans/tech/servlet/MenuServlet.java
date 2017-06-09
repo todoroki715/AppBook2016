@@ -22,6 +22,9 @@ import jp.co.trans.tech.utilities.Utilities;
 
 public class MenuServlet extends HttpServlet{
 
+	final int idHigh = 6;
+	final int passLow = 3;
+	final int passHigh = 20;
 	/*@void doGet(HttpServletRequest, HttpServletResponse)
 	 * get要求でアクセスされた場合の処理
 	 * 承認しないためログイン画面にディスパッチする
@@ -78,8 +81,8 @@ public class MenuServlet extends HttpServlet{
 			}
 
 			//IDが6桁であるか確認する
-			if(Utilities.checkLength(accountId) == false){
-				LoginTopForm.seterrorMsg("ログインIDは、6桁で設定してください");
+			if(Utilities.checkLength(accountId, idHigh) == false){
+				LoginTopForm.seterrorMsg("ログインIDは、"+idHigh+"桁で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -102,8 +105,8 @@ public class MenuServlet extends HttpServlet{
 			}
 
 			//パスワードが3文字以上20文字以下か確認する
-			if(Utilities.checkLengthLowHigh(pass, 3, 20) == false){
-				LoginTopForm.seterrorMsg("パスワードは3～20桁の範囲で設定してください");
+			if(Utilities.checkLengthLowHigh(pass, passLow, passHigh) == false){
+				LoginTopForm.seterrorMsg("パスワードは"+passLow+"～"+passHigh+"桁の範囲で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
