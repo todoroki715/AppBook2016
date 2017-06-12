@@ -33,9 +33,9 @@ public class Utilities {
 	}
 
 
-	/* @boolean checkLength(String)
+	/* @boolean checkLength(String, int)
 	 * 文字列の長さを判定する
-	 * 6文字以外だとfalseを返す
+	 * 文字列がint引数の長さ以外だとfalseを返す
 	 */
 	public static boolean checkLength(String str, int High){
 		if(str.length() != High){
@@ -61,8 +61,8 @@ public class Utilities {
 
 	/* @boolean CheckLengthLowHigh(String, int, int)
 	 * 文字列が半角英数字か判定する
-	 * 文字列としての長さとバイトの長さの差から判定する
-	 * 半角英数字以外だとfalseを返す
+	 * 引数から最小と最大の長さを判定する
+	 * 指定した長さでなければfalseを返す
 	 */
 	public static boolean checkLengthLowHigh(String str, int Low, int High){
 		if(str.length() < Low || str.length() > High){

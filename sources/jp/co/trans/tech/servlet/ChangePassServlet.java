@@ -34,16 +34,33 @@ public class ChangePassServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		    throws IOException, ServletException{
 
+		//セッションを取る
 		HttpSession session = request.getSession();
 
 		try{
+			//フォームをセッションから取る
 			ChangePassFormBean changePassForm = (ChangePassFormBean) session.getAttribute("changePassForm");
+
+			//もしセッション中にフォームがなければ生成する
 			if(changePassForm == null){
 				changePassForm = new ChangePassFormBean();
 			}
+
+			//エラーメッセージ初期化
+			changePassForm.seterrorMsg("");
+
+			//セッションにフォームを保存
+			session.setAttribute("changePassForm", changePassForm);
+
+			//パスワード変更画面にディスパッチ
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 			dispatch.forward(request, response);
 
+		/*@例外処理
+		 * ErrorFormBeanインスタンスを生成し例外のメッセージを設定する
+		 * その後生成したインスタンスをセッションに格納する
+		 * 最後にエラー画面へディスパッチ処理を行う
+		 */
 		}catch (Exception e) {
 			ErrorFormBean ErrorForm = new ErrorFormBean();
 			ErrorForm.setErrorMsg(e.getMessage());

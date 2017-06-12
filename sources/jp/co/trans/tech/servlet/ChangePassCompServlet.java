@@ -14,10 +14,20 @@ import jp.co.trans.tech.formbean.ErrorFormBean;
 import jp.co.trans.tech.service.EmployeeService;
 import jp.co.trans.tech.utilities.Utilities;
 
+/*@ChangePassCompServretクラス
+ * パスワード変更処理を行うクラス
+ * チェックが通らなければパスワード変更画面に移動する
+ * チェックが通ればパスワード変更完了画面に移動する
+ */
+
+
 public class ChangePassCompServlet extends HttpServlet{
-	final int idHigh = 6;
-	final int passLow = 3;
-	final int passHigh = 20;
+
+	private final int idHigh = 6;
+	private final int passLow = 3;
+	private final int passHigh = 20;
+
+
 	/*@void doGet(HttpServletRequest, HttpServletResponse)
 	 * get要求でアクセスされた場合の処理
 	 * get要求は承認しないためログイン画面に飛ばす
@@ -40,6 +50,7 @@ public class ChangePassCompServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		    throws IOException, ServletException{
 
+		//セッションを取る
 		HttpSession session = request.getSession();
 
 		try{
@@ -131,9 +142,12 @@ public class ChangePassCompServlet extends HttpServlet{
 				return;
 			}
 
+
 			EmployeeService Service = new EmployeeService();
 
 			int num = Service.doSelectCount(accountId, pass);
+
+			//対象のデータがあったか確認
 			if(num == 0){
 				changePassForm.seterrorMsg("ログインＩＤ、パスワードに誤りがあるか、利用できないアカウントです");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
@@ -154,7 +168,11 @@ public class ChangePassCompServlet extends HttpServlet{
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePassComp.jsp");
 			dispatch.forward(request, response);
 
-
+		/*@例外処理
+		 * ErrorFormBeanインスタンスを生成し例外のメッセージを設定する
+		 * その後生成したインスタンスをセッションに格納する
+		 * 最後にエラー画面へディスパッチ処理を行う
+		 */
 		}catch (Exception e) {
 			ErrorFormBean ErrorForm = new ErrorFormBean();
 			ErrorForm.setErrorMsg(e.getMessage());

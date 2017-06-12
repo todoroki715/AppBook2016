@@ -130,6 +130,7 @@ public class EmployeeService {
 			sb.append("PASS = '"+pass+"', ");
 			sb.append("UPDATE_DATE = SYSDATE ");
 			sb.append("WHERE ");
+			//sb.append("0!=0");
 			sb.append("ACCOUNT_ID = '"+accountId+"'");
 
 			//SQLを実行しその結果を保存する

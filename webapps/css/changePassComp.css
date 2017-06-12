@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+html,body{
+	height:100%;
+	width:100%;
+}
+.message1{
+	margin-top: 130px;
+	margin-left: 35%;
+}
+
+.message2{
+	margin-left: 37%;
+}
+.BT{
+	width:160px;
+	height:50px;
+	font-size:20px;
+	border: 1px solid #000000;
+	margin-top: 180px;
+	margin-left: 55%;
+}

@@ -9,7 +9,7 @@
 <body>
 <h1>処理中に、エラーが発生しました。</h1>
 <h1>システム管理者に連絡してください</h1>
-${errorForm.getErrorMsg() };
+<h2>${errorForm.getErrorMsg() };</h2>
 
 </body>
 </html>

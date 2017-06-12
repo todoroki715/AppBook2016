@@ -22,9 +22,9 @@ import jp.co.trans.tech.utilities.Utilities;
 
 public class MenuServlet extends HttpServlet{
 
-	final int idHigh = 6;
-	final int passLow = 3;
-	final int passHigh = 20;
+	private final int idHigh = 6;
+	private final int passLow = 3;
+	private final int passHigh = 20;
 	/*@void doGet(HttpServletRequest, HttpServletResponse)
 	 * get要求でアクセスされた場合の処理
 	 * 承認しないためログイン画面にディスパッチする
