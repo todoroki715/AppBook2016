@@ -1,5 +1,8 @@
 package jp.co.trans.tech.utilities;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 
 /*@Utilities_commonクラス
@@ -8,6 +11,11 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Utilities {
 
+
+	public static String getDataStr(Date date ,String str){
+		SimpleDateFormat SimpleDate = new SimpleDateFormat(str);
+		return SimpleDate.format(date);
+	}
 
 	/* @boolean checkIndispensable(String)
 	 * 文字列を判定する
