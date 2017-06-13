@@ -130,7 +130,6 @@ public class EmployeeService {
 			sb.append("PASS = '"+pass+"', ");
 			sb.append("UPDATE_DATE = SYSDATE ");
 			sb.append("WHERE ");
-			//sb.append("0!=0");
 			sb.append("ACCOUNT_ID = '"+accountId+"'");
 
 			//SQLを実行しその結果を保存する
@@ -185,7 +184,6 @@ public class EmployeeService {
 
 		InitialContext context = new InitialContext();
 		DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/OracleC");
-		//DataSource ds = (DataSource)context.lookup("");
 		Connection con = ds.getConnection();
 
 
