@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+html,body{
+	height:100%;
+	width:100%;
+}
+.title{
+	width: 680px;
+	height: 100px;
+	margin-top: 5%;
+	margin-left: 30%;
+}
+
+.formtable{
+	width:850px;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+.ret{
+	margin-left: 1325px;
+	margin-top: 20px;
+}
+.retBT{
+	width:160px;
+	height:50px;
+	font-size:26px;
+
+}
+.back{
+	margin-left: 550px;
+	margin-top: 20px;
+}
+.backBT{
+	width:160px;
+	height:50px;
+	font-size:26px;
+
+}
+
+.error{
+	margin-left: 30%;
+}

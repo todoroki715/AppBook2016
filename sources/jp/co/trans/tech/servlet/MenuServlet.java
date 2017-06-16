@@ -63,6 +63,13 @@ public class MenuServlet extends HttpServlet{
 			//所得したパラメータからIDとパスワードを所得する
 			String accountId = request.getParameter("accountId");
 			String pass = request.getParameter("pass");
+			String view = request.getParameter("vmode");
+
+			if(view.equals("LENBOOK")){
+				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
 
 			//IDが設定されているか確認
 			if(Utilities.checkIndispensable(accountId) == false){

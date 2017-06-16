@@ -84,12 +84,12 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>RenInputBook</servlet-name>
-		<servlet-class>jp.co.trans.tech.servlet.RenInputServlet</servlet-class>
+		<servlet-name>RetInputBook</servlet-name>
+		<servlet-class>jp.co.trans.tech.servlet.RetInputServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>RenInputBook</servlet-name>
-		<url-pattern>/renInputBook.do</url-pattern>
+		<servlet-name>RetInputBook</servlet-name>
+		<url-pattern>/retInputBook.do</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

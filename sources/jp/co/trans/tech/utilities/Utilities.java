@@ -1,5 +1,6 @@
 package jp.co.trans.tech.utilities;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,8 +12,31 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Utilities {
 
+	//指定の日付書式が妥当であるか判定する
+	public static boolean checkDateValid(String date, String str){
+		SimpleDateFormat SimpleDate = new SimpleDateFormat(str);
 
-	public static String getDataStr(Date date ,String str){
+		try {
+			SimpleDate.parse(date);
+		} catch (ParseException e) {
+			return false;
+		}
+		return true;
+	}
+
+	//現在の日付を所得して、指定の書式で返却する
+	public static String getRealTimeStr(String str){
+		Date date = new Date();
+		String ret;
+		ret = getDateStr(date, str);
+		return ret;
+	}
+
+	//Dateの情報をStringで返す
+	public static String getDateStr(Date date ,String str){
+		if(date == null){
+			return "";
+		}
 		SimpleDateFormat SimpleDate = new SimpleDateFormat(str);
 		return SimpleDate.format(date);
 	}
