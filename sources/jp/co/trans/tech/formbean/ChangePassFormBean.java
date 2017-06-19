@@ -9,22 +9,22 @@ public class ChangePassFormBean {
 	private String accountId = "";
 
 	//エラーメッセージをセットする
-	public void seterrorMsg(String Msg){
+	public void setErrorMsg(String Msg){
 		this.errorMsg = Msg;
 	}
 
 	//セットされたエラーメッセージを返す
-	public String geterrorMsg(){
+	public String getErrorMsg(){
 		return this.errorMsg;
 	}
 
 	//アカウントIDをセットする
-	public void setaccountId(String Id){
+	public void setAccountId(String Id){
 		this.accountId = Id;
 	}
 
 	//セットされたアカウントIDを返す
-	public String getaccountId(){
+	public String getAccountId(){
 		return this.accountId;
 	}
 

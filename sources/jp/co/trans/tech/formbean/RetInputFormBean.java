@@ -40,112 +40,112 @@ public class RetInputFormBean {
 	private String returnDate = "";
 
 	//エラーメッセージをセットする
-	public void seterrorMsg(String Msg){
+	public void setErrorMsg(String Msg){
 		this.errorMsg=Msg;
 	}
 
 	//エラーメッセージを返す
-	public String geterrorMsg(){
+	public String getErrorMsg(){
 		return this.errorMsg;
 	}
 
 	//貸出IDをセットする
-	public void setlendId(int Id){
+	public void setLendId(int Id){
 		this.lendId = Id;
 	}
 
 	//貸出IDを返す
-	public int getlendId(){
+	public int getLendId(){
 		return this.lendId;
 	}
 
 	//貸出をしたアカウントIDをセットする
-	public void setlendAccountId(String Id){
+	public void setLendAccountId(String Id){
 		this.lendAccountId=Id;
 	}
 
 	//貸出をしたアカウントIDを返す
-	public String getlendAccountId(){
+	public String getLendAccountId(){
 		return this.lendAccountId;
 	}
 
 	//貸出をしたアカウント名をセットする
-	public void setlendAccountName(String Name){
+	public void setLendAccountName(String Name){
 		this.lendAccountName=Name;
 	}
 
 	//貸出をしたアカウント名を返す
-	public String getlendAccountName(){
+	public String getLendAccountName(){
 		return this.lendAccountName;
 	}
 
 	//貸出日をセットする
-	public void setlendDate(String date){
+	public void setLendDate(String date){
 		this.lendDate=date;
 	}
 
 	//貸出日を返す
-	public String getlendDate(){
+	public String getLendDate(){
 		return this.lendDate;
 	}
 
 	//返却する人のアカウントIDをセットする
-	public void setreturnAccountId(String Id){
+	public void setReturnAccountId(String Id){
 		this.returnAccountId=Id;
 	}
 
 	//返却する人のアカウントIDを返す
-	public String getreturnAccountId(){
+	public String getReturnAccountId(){
 		return this.returnAccountId;
 	}
 
 	//返却する人のアカウント名をセットする
-	public void setreturnAccountName(String Name){
+	public void setReturnAccountName(String Name){
 		this.returnAccountName=Name;
 	}
 
 	//返却する人のアカウント名を返す
-	public String getreturnAccountName(){
+	public String getReturnAccountName(){
 		return this.returnAccountName;
 	}
 
 	//図書IDをセットする
-	public void setbookId(String Id){
+	public void setBookId(String Id){
 		this.bookId=Id;
 	}
 
 	//図書IDを返す
-	public String getbookId(){
+	public String getBookId(){
 		return this.bookId;
 	}
 
 	//図書名をセットする
-	public void setbookName(String Name){
+	public void setBookName(String Name){
 		this.bookName=Name;
 	}
 
 	//図書名を返す
-	public String getbookName(){
+	public String getBookName(){
 		return this.bookName;
 	}
 
 	//返却予定日をセットする
-	public void setreturnYDate(String date){
+	public void setReturnYDate(String date){
 		this.returnYDate=date;
 	}
 
 	//返却予定日を返す
-	public String getreturnYDate(){
+	public String getReturnYDate(){
 		return this.returnYDate;
 	}
 
 	//返却日をセットする
-	public void setreturnDate(String Date){
+	public void setReturnDate(String Date){
 		this.returnDate=Date;
 	}
 
 	//返却日を返す
-	public String getreturnDate(){
+	public String getReturnDate(){
 		return this.returnDate;
 	}
 }

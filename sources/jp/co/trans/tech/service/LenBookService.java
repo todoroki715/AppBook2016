@@ -34,31 +34,6 @@ public class LenBookService {
 		ResultSet rs = null;
 		List<LenBookDto> Form = new ArrayList<LenBookDto>();
 		try{
-
-			//シングルクォーテーションの変換
-			bookName = bookName.replace("\'","\'\'");
-			accountName = accountName.replace("\'","\'\'");
-
-			boolean escape_flag_book = false;
-			boolean escape_flag_account = false;
-			//ワイルドカードの判定・変換
-			if(bookName.matches(".*%.*") || bookName.matches(".*％.*")
-					|| bookName.matches(".*_.*") || bookName.matches(".*＿.*")){
-				escape_flag_book = true;
-				bookName = bookName.replace("%",escape_word+"%");
-				bookName = bookName.replace("％",escape_word+"％");
-				bookName = bookName.replace("_",escape_word+"_");
-				bookName = bookName.replace("＿",escape_word+"＿");
-			}
-			if(accountName.matches(".*%.*") || accountName.matches(".*％.*")
-					|| accountName.matches(".*_.*") || accountName.matches(".*＿.*")){
-				escape_flag_account = true;
-				accountName = accountName.replace("%",escape_word+"%");
-				accountName = accountName.replace("％",escape_word+"％");
-				accountName = accountName.replace("_",escape_word+"_");
-				accountName = accountName.replace("＿",escape_word+"＿");
-			}
-
 			con = Conection();
 			state = con.createStatement();
 
@@ -84,20 +59,49 @@ public class LenBookService {
 
 			//空欄かどうか判定する
 			if(Utilities.checkIndispensable(bookName)){
+				boolean escape_flag = false;
+				//シングルクォーテーションの変換
+				bookName = bookName.replace("\'","\'\'");
+				//ワイルドカードの判定・変換
+				if(bookName.matches(".*%.*") || bookName.matches(".*％.*")
+						|| bookName.matches(".*_.*") || bookName.matches(".*＿.*")){
+					escape_flag = true;
+					bookName = bookName.replace("%",escape_word+"%");
+					bookName = bookName.replace("％",escape_word+"％");
+					bookName = bookName.replace("_",escape_word+"_");
+					bookName = bookName.replace("＿",escape_word+"＿");
+				}
 				sb.append("AND BOK_MST.BOOK_NAME LIKE '%"+bookName+"%' ");
 
 				//エスケープ文字が入っているかどうか
-				if(escape_flag_book == true){
+				if(escape_flag == true){
 					sb.append("ESCAPE '"+escape_word+"' ");
 				}
 			}
 			if(Utilities.checkIndispensable(accountName)){
+				boolean escape_flag = false;
+				//シングルクォーテーションの変換
+				accountName = accountName.replace("\'","\'\'");
+				//ワイルドカードの判定・変換
+				if(accountName.matches(".*%.*") || accountName.matches(".*％.*")
+						|| accountName.matches(".*_.*") || accountName.matches(".*＿.*")){
+					escape_flag = true;
+					accountName = accountName.replace("%",escape_word+"%");
+					accountName = accountName.replace("％",escape_word+"％");
+					accountName = accountName.replace("_",escape_word+"_");
+					accountName = accountName.replace("＿",escape_word+"＿");
+				}
+
 				sb.append("AND EMP_MST.ACCOUNT_NAME LIKE '%"+accountName+"%' ");
-				if(escape_flag_account == true){
+
+				//エスケープ文字が入っているかどうか
+				if(escape_flag == true){
 					sb.append("ESCAPE '"+escape_word+"' ");
 				}
 
 			}
+
+			//ソート判定
 			sb.append("ORDER BY BOK_MST.BOOK_ID");
 
 			//SQL実行
@@ -107,14 +111,14 @@ public class LenBookService {
 			//要素があればリストに追加する
 			while(rs.next()){
 				Form.add(new LenBookDto());
-				Form.get(count).setbookId(rs.getString("BOOK_ID"));
-				Form.get(count).setbookName(rs.getString("BOOK_NAME"));
-				Form.get(count).setlendId(rs.getInt("LEND_ID"));
-				Form.get(count).setlendAccountId(rs.getString("LEND_ACCOUNT_ID"));
-				Form.get(count).setaccountName(rs.getString("ACCOUNT_NAME"));
-				Form.get(count).setlendDate(rs.getDate("LEND_DATE"));
-				Form.get(count).setreturnYDate(rs.getDate("RETURN_Y_DATE"));
-				Form.get(count).setupdateDate(rs.getDate("UPDATE_DATE"));
+				Form.get(count).setBookId(rs.getString("BOOK_ID"));
+				Form.get(count).setBookName(rs.getString("BOOK_NAME"));
+				Form.get(count).setLendId(rs.getInt("LEND_ID"));
+				Form.get(count).setLendAccountId(rs.getString("LEND_ACCOUNT_ID"));
+				Form.get(count).setAccountName(rs.getString("ACCOUNT_NAME"));
+				Form.get(count).setLendDate(rs.getDate("LEND_DATE"));
+				Form.get(count).setReturnYDate(rs.getDate("RETURN_Y_DATE"));
+				Form.get(count).setUpdateDate(rs.getDate("UPDATE_DATE"));
 				count++;
 			}
 

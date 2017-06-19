@@ -18,7 +18,7 @@ import jp.co.trans.tech.dto.RetBookDto;
 public class RetInputUpdService {
 
 	/*@RetBookDto doSelectBookHistory(String)
-	 *図書の貸出状態を確認するメソッド
+	 *図書の貸出履歴を確認するメソッド
 	 *確認した図書のデータを返す
 	 */
 	public RetBookDto doSelectBookHistory(String lendId)
@@ -63,13 +63,13 @@ public class RetInputUpdService {
 
 			//データ所得
 			while(rs.next()){
-				Dto.setbookId(rs.getString("BOOK_ID"));
-				Dto.setbookName(rs.getString("BOOK_NAME"));
-				Dto.setlendId(rs.getInt("LEND_ID"));
-				Dto.setlendAccountId(rs.getString("LEND_ACCOUNT_ID"));
-				Dto.setlendAccountName(rs.getString("ACCOUNT_NAME"));
-				Dto.setlendDate(rs.getDate("LEND_DATE"));
-				Dto.setreturnYDate(rs.getDate("RETURN_Y_DATE"));
+				Dto.setBookId(rs.getString("BOOK_ID"));
+				Dto.setBookName(rs.getString("BOOK_NAME"));
+				Dto.setLendId(rs.getInt("LEND_ID"));
+				Dto.setLendAccountId(rs.getString("LEND_ACCOUNT_ID"));
+				Dto.setLendAccountName(rs.getString("ACCOUNT_NAME"));
+				Dto.setLendDate(rs.getDate("LEND_DATE"));
+				Dto.setReturnYDate(rs.getDate("RETURN_Y_DATE"));
 			}
 
 		}finally{
@@ -138,15 +138,24 @@ public class RetInputUpdService {
 			sb.append("WHERE ");
 			sb.append("LEND_ID = "+lendId);
 			int ret;
+
 			ret = state.executeUpdate(sb.toString());
+
+			//削除できなければロールバック
 			if(ret == 0){
 				con.rollback();
 				return false;
 			}
+
+			//再度ステートメントを生成するので一端閉じる
 			if(state != null && state.isClosed() == false){
 				state.close();
 			}
 
+			//ステートメント生成
+			state = con.createStatement();
+
+			//SQL生成
 			sb = new StringBuilder();
 			sb.append("UPDATE REN_HIS ");
 			sb.append("SET ");
@@ -155,7 +164,8 @@ public class RetInputUpdService {
 			sb.append("UPDATE_DATE = SYSDATE ");
 			sb.append("WHERE ");
 			sb.append("LEND_ID = "+lendId);
-			state = con.createStatement();
+
+			//SQL実行
 			ret = state.executeUpdate(sb.toString());
 			if(ret == 0){
 				con.rollback();

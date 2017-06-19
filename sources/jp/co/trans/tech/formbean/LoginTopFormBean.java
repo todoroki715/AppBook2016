@@ -20,12 +20,12 @@ public class LoginTopFormBean {
 
 
 	//エラーメッセージをセットする
-	public void seterrorMsg(String errorMsg){
+	public void setErrorMsg(String errorMsg){
 		this.errorMsg = errorMsg;
 	}
 
 	//アカウント名をセットする
-	public void setaccountName(String accountName){
+	public void setAccountName(String accountName){
 		this.accountName = accountName;
 	}
 
@@ -35,27 +35,27 @@ public class LoginTopFormBean {
 	}
 
 	//管理者フラグをセットする
-	public void setmasterFlg(int Flg){
+	public void setMasterFlg(int Flg){
 		this.masterFlg = Flg;
 	}
 
 	//エラーメッセージを返す
-	public String geterrorMsg(){
+	public String getErrorMsg(){
 		return this.errorMsg;
 	}
 
 	//アカウント名を返す
-	public String getaccountName(){
+	public String getAccountName(){
 		return this.accountName;
 	}
 
 	//アカウントIDを返す
-	public String getaccountId(){
+	public String getAccountId(){
 		return this.accountId;
 	}
 
 	//管理者フラグを返す
-	public int getmasterFlg(){
+	public int getMasterFlg(){
 		return this.masterFlg;
 	}
 }

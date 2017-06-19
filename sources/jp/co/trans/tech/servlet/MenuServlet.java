@@ -73,7 +73,7 @@ public class MenuServlet extends HttpServlet{
 
 			//IDが設定されているか確認
 			if(Utilities.checkIndispensable(accountId) == false){
-				LoginTopForm.seterrorMsg("ログインIDが未設定です");
+				LoginTopForm.setErrorMsg("ログインIDが未設定です");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -81,7 +81,7 @@ public class MenuServlet extends HttpServlet{
 
 			//IDが数値かどうか確認する
 			if(Utilities.checkNumeric(accountId) == false){
-				LoginTopForm.seterrorMsg("ログインIDは半角数字で設定してください");
+				LoginTopForm.setErrorMsg("ログインIDは半角数字で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -89,7 +89,7 @@ public class MenuServlet extends HttpServlet{
 
 			//IDが6桁であるか確認する
 			if(Utilities.checkLength(accountId, idHigh) == false){
-				LoginTopForm.seterrorMsg("ログインIDは、"+idHigh+"桁で設定してください");
+				LoginTopForm.setErrorMsg("ログインIDは、"+idHigh+"桁で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -97,7 +97,7 @@ public class MenuServlet extends HttpServlet{
 
 			//パスワードが設定されているか確認
 			if(Utilities.checkIndispensable(pass) == false){
-				LoginTopForm.seterrorMsg("パスワードが未設定です");
+				LoginTopForm.setErrorMsg("パスワードが未設定です");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -105,7 +105,7 @@ public class MenuServlet extends HttpServlet{
 
 			//パスワードが半角英数字か確認する
 			if(Utilities.checkAlphanumeric(pass) == false){
-				LoginTopForm.seterrorMsg("パスワードは半角英数字で設定してください");
+				LoginTopForm.setErrorMsg("パスワードは半角英数字で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -113,7 +113,7 @@ public class MenuServlet extends HttpServlet{
 
 			//パスワードが3文字以上20文字以下か確認する
 			if(Utilities.checkLengthLowHigh(pass, passLow, passHigh) == false){
-				LoginTopForm.seterrorMsg("パスワードは"+passLow+"～"+passHigh+"桁の範囲で設定してください");
+				LoginTopForm.setErrorMsg("パスワードは"+passLow+"～"+passHigh+"桁の範囲で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -127,7 +127,7 @@ public class MenuServlet extends HttpServlet{
 
 			//所得できなかったらエラーを出してディスパッチ処理
 			if(num == 0){
-				LoginTopForm.seterrorMsg("ログインID、パスワードに誤りがあるか、利用できないアカウントです");
+				LoginTopForm.setErrorMsg("ログインID、パスワードに誤りがあるか、利用できないアカウントです");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -137,7 +137,7 @@ public class MenuServlet extends HttpServlet{
 			EmployeeDto Dto = Employee.doSelectPrimay(accountId);
 
 			if(Dto.getaccountId() == null){
-				LoginTopForm.seterrorMsg("ログイン者の情報を確認できませんでした");
+				LoginTopForm.setErrorMsg("ログイン者の情報を確認できませんでした");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -145,11 +145,11 @@ public class MenuServlet extends HttpServlet{
 
 			//ログイン情報保存
 			LoginTopForm.setAccountId(Dto.getaccountId());
-			LoginTopForm.setaccountName(Dto.getaccountName());
-			LoginTopForm.setmasterFlg(Dto.getmasterFlg());
+			LoginTopForm.setAccountName(Dto.getaccountName());
+			LoginTopForm.setMasterFlg(Dto.getmasterFlg());
 
 			//ログイン挨拶文字列格納
-			session.setAttribute("GREETING_NAME","こんにちは！" + LoginTopForm.getaccountName() + "さん");
+			session.setAttribute("GREETING_NAME","こんにちは！" + LoginTopForm.getAccountName() + "さん");
 
 			//ディスパッチ処理（メニュー画面に移行）
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");

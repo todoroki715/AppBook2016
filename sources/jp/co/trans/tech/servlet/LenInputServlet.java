@@ -47,7 +47,7 @@ public class LenInputServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 
 		try{
-			//フォームをセッションから取る
+			//フォームのインスタンスを生成
 			LenInputFormBean LenInputForm = new LenInputFormBean();;
 
 			//セッションにフォームを保存
@@ -57,8 +57,8 @@ public class LenInputServlet extends HttpServlet{
 			LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
 
 			//ログインフォームからアカウントIDと名前を取り出す
-			LenInputForm.setaccountId(LoginTopForm.getaccountId());
-			LenInputForm.setaccountName(LoginTopForm.getaccountName());
+			LenInputForm.setAccountId(LoginTopForm.getAccountId());
+			LenInputForm.setAccountName(LoginTopForm.getAccountName());
 
 			//クリックされたボタンからID情報を取り出す
 			String bookId = request.getParameter("bookIdL");
@@ -71,22 +71,22 @@ public class LenInputServlet extends HttpServlet{
 			//本に関するデータを取り出す
 			Dto = RegService.doSelectBookPrimary(bookId);
 			if(Dto == null){
-				LenInputForm.seterrorMsg("該当と所がありません。再度、図書貸出返却画面で確認してください。");
+				LenInputForm.setErrorMsg("該当図書がありません。再度、図書貸出返却画面で確認してください。");
 			}else{
 
 				//取り出したデータを保存
-				LenInputForm.setbookId(Dto.getbookId());
-				LenInputForm.setbookName(Dto.getbookName());
-				LenInputForm.setintro(Dto.getintro());
+				LenInputForm.setBookId(Dto.getBookId());
+				LenInputForm.setBookName(Dto.getBookName());
+				LenInputForm.setIntro(Dto.getIntro());
 
 				//貸出フラグが立っていればエラーメッセージを出す
-				if(Dto.getlendFlg() == 1){
-					LenInputForm.seterrorMsg("貸出停止の図書です。再度。図書貸出返却画面で確認してください。");
+				if(Dto.getLendFlg() == 1){
+					LenInputForm.setErrorMsg("貸出停止の図書です。再度。図書貸出返却画面で確認してください。");
 				}
 			}
 
 
-			LenInputForm.setreturnYDate(Utilities.getRealTimeStr("yyyy/MM/dd"));
+			LenInputForm.setReturnYDate(Utilities.getRealTimeStr("yyyy/MM/dd"));
 
 			//貸出画面にディスパッチ
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/lenInputBook.jsp");

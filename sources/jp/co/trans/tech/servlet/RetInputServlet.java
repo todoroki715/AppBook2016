@@ -55,8 +55,8 @@ public class RetInputServlet extends HttpServlet{
 			LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
 
 			//ログインフォームからアカウントIDとアカウント名を所得する
-			RetInputForm.setreturnAccountId(LoginTopForm.getaccountId());
-			RetInputForm.setreturnAccountName(LoginTopForm.getaccountName());
+			RetInputForm.setReturnAccountId(LoginTopForm.getAccountId());
+			RetInputForm.setReturnAccountName(LoginTopForm.getAccountName());
 
 			//ボタンからデータ所得
 			String bookId = request.getParameter("bookIdR");
@@ -65,27 +65,27 @@ public class RetInputServlet extends HttpServlet{
 			RetInputUpdService Service = new RetInputUpdService();
 			RetBookDto Dto = new RetBookDto();
 
-			//返却済みか確認
+			//貸出履歴に存在するか確認
 			Dto = Service.doSelectBookHistory(bookId);
 			if(Dto == null){
-				RetInputForm.seterrorMsg("既に返却済みの可能性があります。再度、図書貸出・返却画面でご確認してください。");
+				RetInputForm.setErrorMsg("データベースにエラーがあります。システム管理者に連絡してください。");
 
 			}else{
 				//所得できたらデータ保存
-				RetInputForm.setbookId(Dto.getbookId());
-				RetInputForm.setbookName(Dto.getbookName());
-				RetInputForm.setlendId(Dto.getlendId());
-				RetInputForm.setlendAccountId(Dto.getlendAccountId());
-				RetInputForm.setlendAccountName(Dto.getlendAccountName());
-				RetInputForm.setlendDate(Dto.getlendDateDisp());
-				RetInputForm.setreturnYDate(Dto.getreturnYDateDisp());
+				RetInputForm.setBookId(Dto.getBookId());
+				RetInputForm.setBookName(Dto.getBookName());
+				RetInputForm.setLendId(Dto.getLendId());
+				RetInputForm.setLendAccountId(Dto.getLendAccountId());
+				RetInputForm.setLendAccountName(Dto.getLendAccountName());
+				RetInputForm.setLendDate(Dto.getLendDateDisp());
+				RetInputForm.setReturnYDate(Dto.getReturnYDateDisp());
 			}
 
 			//現在の日付をセット
-			RetInputForm.setreturnDate(Utilities.getRealTimeStr("yyyy/MM/dd"));
+			RetInputForm.setReturnDate(Utilities.getRealTimeStr("yyyy/MM/dd"));
 
 
-			//パスワード変更画面にディスパッチ
+			//返却画面にディスパッチ
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/retInputBook.jsp");
 			dispatch.forward(request, response);
 

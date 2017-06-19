@@ -46,7 +46,7 @@ public class LoginTopServlet extends HttpServlet{
 				LoginForm = new LoginTopFormBean();
 
 			}
-			LoginForm.seterrorMsg("");
+			LoginForm.setErrorMsg("");
 			session.setAttribute("loginTopForm", LoginForm);
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/loginTop.jsp");
 			dispatch.forward(request, response);

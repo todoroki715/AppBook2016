@@ -23,17 +23,17 @@ public class LenBookListFormBean {
 	private List<LenBookDto> lenBookList;
 
 	//エラーメッセージをセットする
-	public void seterrorMsg(String errorMsg){
+	public void setErrorMsg(String errorMsg){
 		this.errorMsg = errorMsg;
 	}
 
 	//エラーメッセージを返す
-	public String geterrorMsg(){
+	public String getErrorMsg(){
 		return this.errorMsg;
 	}
 
 	//図書名をセットする
-	public void setbookName(String Name){
+	public void setBookName(String Name){
 
 		//入力されていなければ初期化
 		if(Utilities.checkIndispensable(Name) == false){
@@ -43,12 +43,12 @@ public class LenBookListFormBean {
 	}
 
 	//図書名を返す
-	public String getbookName(){
+	public String getBookName(){
 		return this.bookName;
 	}
 
 	//アカウント名をセットする
-	public void setaccountName(String Name){
+	public void setAccountName(String Name){
 
 		//入力されていなければ初期化
 		if(Utilities.checkIndispensable(Name) == false){
@@ -58,7 +58,7 @@ public class LenBookListFormBean {
 	}
 
 	//アカウント名を返す
-	public String getaccountName(){
+	public String getAccountName(){
 		return this.accountName;
 	}
 

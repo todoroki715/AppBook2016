@@ -64,7 +64,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//IDが設定されているか確認
 			if(Utilities.checkIndispensable(accountId) == false){
-				changePassForm.seterrorMsg("ログインIDが未設定です");
+				changePassForm.setErrorMsg("ログインIDが未設定です");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -72,7 +72,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//IDが数値かどうか確認する
 			if(Utilities.checkNumeric(accountId) == false){
-				changePassForm.seterrorMsg("ログインIDは半角数字で設定してください");
+				changePassForm.setErrorMsg("ログインIDは半角数字で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -80,7 +80,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//IDが6桁であるか確認する
 			if(Utilities.checkLength(accountId, idHigh) == false){
-				changePassForm.seterrorMsg("ログインIDは、6桁で設定してください");
+				changePassForm.setErrorMsg("ログインIDは、6桁で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -88,7 +88,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//パスワードが設定されているか確認
 			if(Utilities.checkIndispensable(pass) == false){
-				changePassForm.seterrorMsg("パスワードが未設定です");
+				changePassForm.setErrorMsg("パスワードが未設定です");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -96,7 +96,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//パスワードが半角英数字か確認する
 			if(Utilities.checkAlphanumeric(pass) == false){
-				changePassForm.seterrorMsg("パスワードは半角英数字で設定してください");
+				changePassForm.setErrorMsg("パスワードは半角英数字で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -104,7 +104,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//パスワードが3文字以上20文字以下か確認する
 			if(Utilities.checkLengthLowHigh(pass, passLow, passHigh) == false){
-				changePassForm.seterrorMsg("パスワードは3～20桁の範囲で設定してください");
+				changePassForm.setErrorMsg("パスワードは3～20桁の範囲で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -112,7 +112,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//変更後パスワードが設定されているか確認
 			if(Utilities.checkIndispensable(changePass) == false){
-				changePassForm.seterrorMsg("新しいパスワードが未設定です");
+				changePassForm.setErrorMsg("新しいパスワードが未設定です");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -120,7 +120,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//変更後パスワードが半角英数字か確認する
 			if(Utilities.checkAlphanumeric(changePass) == false){
-				changePassForm.seterrorMsg("新しいパスワードは半角英数字で設定してください");
+				changePassForm.setErrorMsg("新しいパスワードは半角英数字で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -128,7 +128,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//変更後パスワードが3文字以上20文字以下か確認する
 			if(Utilities.checkLengthLowHigh(changePass, 3, 20) == false){
-				changePassForm.seterrorMsg("新しいパスワードは3～20桁の範囲で設定してください");
+				changePassForm.setErrorMsg("新しいパスワードは3～20桁の範囲で設定してください");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -136,7 +136,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//新しいパスワードと確認用パスワードが一致しているか確認する
 			if(changePass.equals(comfPass) == false){
-				changePassForm.seterrorMsg("確認パスワードが新しいパスワードと一致しません");
+				changePassForm.setErrorMsg("確認パスワードが新しいパスワードと一致しません");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -149,7 +149,7 @@ public class ChangePassCompServlet extends HttpServlet{
 
 			//対象のデータがあったか確認
 			if(num == 0){
-				changePassForm.seterrorMsg("ログインＩＤ、パスワードに誤りがあるか、利用できないアカウントです");
+				changePassForm.setErrorMsg("ログインＩＤ、パスワードに誤りがあるか、利用できないアカウントです");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -158,7 +158,7 @@ public class ChangePassCompServlet extends HttpServlet{
 			//更新処理を行い、成功したかどうかを返す
 			boolean Success = Service.doUpdatePass(accountId, changePass);
 			if(Success == false){
-				changePassForm.seterrorMsg("パスワードの変更ができませんでした。お手数ですが、再度実施してください。");
+				changePassForm.setErrorMsg("パスワードの変更ができませんでした。お手数ですが、再度実施してください。");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/changePass.jsp");
 				dispatch.forward(request, response);
 				return;

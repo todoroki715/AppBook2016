@@ -47,7 +47,7 @@ public class ChangePassServlet extends HttpServlet{
 			}
 
 			//エラーメッセージ初期化
-			changePassForm.seterrorMsg("");
+			changePassForm.setErrorMsg("");
 
 			//セッションにフォームを保存
 			session.setAttribute("changePassForm", changePassForm);

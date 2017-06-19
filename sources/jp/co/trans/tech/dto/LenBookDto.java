@@ -42,37 +42,37 @@ public class LenBookDto {
 
 
 	//図書IDをセットする
-	public void setbookId(String Id){
+	public void setBookId(String Id){
 		this.bookId = Id;
 	}
 
 	//図書IDを返す
-	public String getbookId(){
+	public String getBookId(){
 		return this.bookId;
 	}
 
 	//図書名をセットする
-	public void setbookName(String Name){
+	public void setBookName(String Name){
 		this.bookName = Name;
 	}
 
 	//図書名を返す
-	public String getbookName(){
+	public String getBookName(){
 		return this.bookName;
 	}
 
 	//貸出IDをセットする
-	public void setlendId(int Id){
+	public void setLendId(int Id){
 		this.lendId = Id;
 	}
 
 	//貸出IDを返す
-	public int getlendId(){
+	public int getLendId(){
 		return this.lendId;
 	}
 
 	//貸出をしたアカウントIDをセットする
-	public void setlendAccountId(String Id){
+	public void setLendAccountId(String Id){
 		this.lendAccountId = Id;
 	}
 
@@ -82,53 +82,53 @@ public class LenBookDto {
 	}
 
 	//アカウント名をセットする
-	public void setaccountName(String Name){
+	public void setAccountName(String Name){
 		this.accountName = Name;
 	}
 
 	//アカウント名を返す
-	public String getaccountName(){
+	public String getAccountName(){
 		return this.accountName;
 	}
 
 	//貸出日をセットする
-	public void setlendDate(Date date){
+	public void setLendDate(Date date){
 		this.lendDate = date;
 	}
 
 	//貸出日を返す
-	public Date getlendDate(){
+	public Date getLendDate(){
 		return this.lendDate;
 	}
 
 	//返却予定日をセットする
-	public void setreturnYDate(Date date){
+	public void setReturnYDate(Date date){
 		this.returnYDate = date;
 	}
 
 	//返却予定日を返す
-	public Date getreturnYDate(){
+	public Date getReturnYDate(){
 		return this.returnYDate;
 	}
 
 	//更新日をセットする
-	public void setupdateDate(Date date){
+	public void setUpdateDate(Date date){
 		this.updateDate = date;
 	}
 
 	//更新日を返す
-	public Date getupdateDate(){
+	public Date getUpdateDate(){
 		return this.updateDate;
 	}
 
 	//貸出日を文字列にして返す
-	public String getlendDateDisp(){
+	public String getLendDateDisp(){
 		this.lendDateDisp = Utilities.getDateStr(this.lendDate, "yyyy/MM/dd");
 		return this.lendDateDisp;
 	}
 
 	//返却予定日を文字列にして返す
-	public String getreturnYDateDisp(){
+	public String getReturnYDateDisp(){
 		this.returnYDateDisp = Utilities.getDateStr(this.returnYDate, "yyyy/MM/dd");
 		return this.returnYDateDisp;
 	}

@@ -19,42 +19,42 @@ public class BookDto {
 	private int lendFlg=0;
 
 	//図書IDをセットする
-	public void setbookId(String Id){
+	public void setBookId(String Id){
 		this.bookId = Id;
 	}
 
 	//図書IDを返す
-	public String getbookId(){
+	public String getBookId(){
 		return this.bookId;
 	}
 
 	//図書名をセットする
-	public void setbookName(String Name){
+	public void setBookName(String Name){
 		this.bookName = Name;
 	}
 
 	//図書名を返す
-	public String getbookName(){
+	public String getBookName(){
 		return this.bookName;
 	}
 
 	//URLをセットする
-	public void setintro(String intro){
+	public void setIntro(String intro){
 		this.intro=intro;
 	}
 
 	//URLを返す
-	public String getintro(){
+	public String getIntro(){
 		return this.intro;
 	}
 
 	//貸出フラグセットする
-	public void setlendFlg(int Flg){
+	public void setLendFlg(int Flg){
 		this.lendFlg=Flg;
 	}
 
 	//貸出フラグを返す
-	public int getlendFlg(){
+	public int getLendFlg(){
 		return this.lendFlg;
 	}
 }

@@ -47,17 +47,17 @@ public class RetUpdateServlet extends HttpServlet{
 			RetInputFormBean RetInputForm = (RetInputFormBean) session.getAttribute("retInputForm");
 
 			//エラーメッセージを初期化
-			RetInputForm.seterrorMsg("");
+			RetInputForm.setErrorMsg("");
 
 			RetInputUpdService Service = new RetInputUpdService();
 			int num;
 
 			//貸出件数検索
-			num = Service.doSelectLenBookConf(RetInputForm.getlendId());
+			num = Service.doSelectLenBookConf(RetInputForm.getLendId());
 
 			//貸出状態でなければ返却済みと判断
 			if(num == 0){
-				RetInputForm.seterrorMsg("既に返却済みの図書の可能性があります。図書貸出・返却画面にて再度ご確認ください。");
+				RetInputForm.setErrorMsg("既に返却済みの図書の可能性があります。図書貸出・返却画面にて再度ご確認ください。");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/retInputBook.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -66,11 +66,11 @@ public class RetUpdateServlet extends HttpServlet{
 			boolean bool;
 
 			//図書の返却・削除・更新を行う
-			bool = Service.doRetUpdateBook(RetInputForm.getlendId(), RetInputForm.getreturnAccountId());
+			bool = Service.doRetUpdateBook(RetInputForm.getLendId(), RetInputForm.getReturnAccountId());
 
 			//失敗すればエラーメッセージを出す
 			if(bool == false){
-				RetInputForm.seterrorMsg("返却ができませんでした。お手数ですが、図書貸出・返却画面でご確認の上、再度、返却を行ってください。");
+				RetInputForm.setErrorMsg("返却ができませんでした。お手数ですが、図書貸出・返却画面でご確認の上、再度、返却を行ってください。");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/retInputBook.jsp");
 				dispatch.forward(request, response);
 				return;

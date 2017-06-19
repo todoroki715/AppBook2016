@@ -49,11 +49,11 @@ public class LenRegServlet extends HttpServlet{
 			//返却予定日を所得する
 			String returnYDate = request.getParameter("returnYDate");
 			//エラーメッセージ初期化
-			LenInputForm.seterrorMsg("");
+			LenInputForm.setErrorMsg("");
 
 			//入力確認
 			if(Utilities.checkIndispensable(returnYDate) == false){
-				LenInputForm.seterrorMsg("返却予定日が未設定です。");
+				LenInputForm.setErrorMsg("返却予定日が未設定です。");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/lenInputBook.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -61,7 +61,7 @@ public class LenRegServlet extends HttpServlet{
 
 			//妥当性チェック
 			if(Utilities.checkDateValid(returnYDate, "yyyy/MM/dd") == false){
-				LenInputForm.seterrorMsg("返却予定日の入力に誤りがあります。");
+				LenInputForm.setErrorMsg("返却予定日の入力に誤りがあります。");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/lenInputBook.jsp");
 				dispatch.forward(request, response);
 				return;
@@ -71,22 +71,23 @@ public class LenRegServlet extends HttpServlet{
 
 			int count;
 			//貸出されているか確認
-			count = RegService.doSelectLenBookConf(LenInputForm.getbookId());
+			count = RegService.doSelectLenBookConf(LenInputForm.getBookId());
 
 			//されていればエラーメッセージを表記して画面に戻る
 			if(count >= 1){
-				LenInputForm.seterrorMsg("既に貸し出されている図書の可能性があります。図書貸出・返却画面にて再度ご確認ください。");
+				LenInputForm.setErrorMsg("既に貸し出されている図書の可能性があります。図書貸出・返却画面にて再度ご確認ください。");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/lenInputBook.jsp");
 				dispatch.forward(request, response);
 				return;
 			}
 
 			boolean bool;
+
 			//貸出登録処理,貸出できればtrueが返る
-			bool = RegService.doInsertLenBook(LenInputForm.getaccountId(),LenInputForm.getbookId(),returnYDate);
+			bool = RegService.doInsertLenBook(LenInputForm.getAccountId(),LenInputForm.getBookId(),returnYDate);
 
 			if(bool == false){
-				LenInputForm.seterrorMsg("貸出できませんでした。お手数ですが、図書貸出・返却画面でご確認の上。再度貸し出しを行ってください。");
+				LenInputForm.setErrorMsg("貸出できませんでした。お手数ですが、図書貸出・返却画面でご確認の上。再度貸し出しを行ってください。");
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/lenInputBook.jsp");
 				dispatch.forward(request, response);
 				return;

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import jp.co.trans.tech.formbean.ErrorFormBean;
 import jp.co.trans.tech.formbean.LenBookListFormBean;
 import jp.co.trans.tech.service.LenBookService;
+import jp.co.trans.tech.utilities.Construct;
 
 /*@LenBookList
  * 図書のデータをリスト化する
@@ -45,28 +46,33 @@ public class LenBookListServlet extends HttpServlet{
 			//フォームをセッションから取る
 			LenBookListFormBean LenBookListForm = (LenBookListFormBean) session.getAttribute("lenBookForm");
 
-			String view = request.getParameter("vmode");
+			String view = request.getParameter(Construct.VIEW_MODE);
 
 			//もしセッション中にフォームがなければ生成する
-			if(view.equals("MENU")){
+			if(view.equals(Construct.MODE_MENU)){
 				LenBookListForm = new LenBookListFormBean();
 				//セッションにフォームを保存
 				session.setAttribute("lenBookForm", LenBookListForm);
 
-			}else if(view.equals("LENBOOK")){
-				LenBookListForm.setbookName(request.getParameter("bookName"));
-				LenBookListForm.setaccountName(request.getParameter("accountName"));
+			}else if(view.equals(Construct.MODE_LEN)){
+				LenBookListForm.setBookName(request.getParameter("bookName"));
+				LenBookListForm.setAccountName(request.getParameter("accountName"));
 			}
-			LenBookListForm.seterrorMsg("");
+
+			//エラーメッセージ初期化
+			LenBookListForm.setErrorMsg("");
+
+			//インスタンスを生成
 			LenBookService Service = new LenBookService();
-			LenBookListForm.setList(Service.doSelectLenBook(LenBookListForm.getbookName(), LenBookListForm.getaccountName()));
+
+			LenBookListForm.setList(Service.doSelectLenBook(LenBookListForm.getBookName(), LenBookListForm.getAccountName()));
 
 			if(LenBookListForm.getList().size() == 0){
-				LenBookListForm.seterrorMsg("該当する図書はありません。");
+				LenBookListForm.setErrorMsg("該当する図書はありません。");
 			}
 
 
-			//パスワード変更画面にディスパッチ
+			//貸出画面にディスパッチ
 			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/lenBookList.jsp");
 			dispatch.forward(request, response);
 

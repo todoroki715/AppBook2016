@@ -45,13 +45,13 @@ public class LenRegService {
 			//SQLを実行する
 			rs = state.executeQuery(sb.toString());
 
+			Dto = new BookDto();
 			//データがあれば変数に格納する
 			while(rs.next()){
-				Dto = new BookDto();
-				Dto.setbookId(rs.getString("Book_Id"));
-				Dto.setbookName(rs.getString("Book_Name"));
-				Dto.setintro(rs.getString("INTRO"));
-				Dto.setlendFlg(rs.getInt("LEND_FLG"));
+				Dto.setBookId(rs.getString("Book_Id"));
+				Dto.setBookName(rs.getString("Book_Name"));
+				Dto.setIntro(rs.getString("INTRO"));
+				Dto.setLendFlg(rs.getInt("LEND_FLG"));
 			}
 		}finally{
 			closeSet(con, state, rs);

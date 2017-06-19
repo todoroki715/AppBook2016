@@ -28,72 +28,72 @@ public class LenInputFormBean {
 
 
 	//エラーメッセージセット
-	public void seterrorMsg(String Msg){
+	public void setErrorMsg(String Msg){
 		this.errorMsg=Msg;
 	}
 
 	//エラーメッセージを返す
-	public String geterrorMsg(){
+	public String getErrorMsg(){
 		return this.errorMsg;
 	}
 
 	//アカウントIDセット
-	public void setaccountId(String Id){
+	public void setAccountId(String Id){
 		this.accountId=Id;
 	}
 
 	//アカウントIDを返す
-	public String getaccountId(){
+	public String getAccountId(){
 		return this.accountId;
 	}
 
 	//アカウント名をセットする
-	public void setaccountName(String Name){
+	public void setAccountName(String Name){
 		this.accountName=Name;
 	}
 
 	//アカウント名を返す
-	public String getaccountName(){
+	public String getAccountName(){
 		return this.accountName;
 	}
 
 	//図書IDをセットする
-	public void setbookId(String Id){
+	public void setBookId(String Id){
 		this.bookId=Id;
 	}
 
 	//図書IDを返す
-	public String getbookId(){
+	public String getBookId(){
 		return this.bookId;
 	}
 
 	//図書名をセットする
-	public void setbookName(String Name){
+	public void setBookName(String Name){
 		this.bookName=Name;
 	}
 
 	//図書名を返す
-	public String getbookName(){
+	public String getBookName(){
 		return this.bookName;
 	}
 
 	//URLをセットする
-	public void setintro(String intro){
+	public void setIntro(String intro){
 		this.intro=intro;
 	}
 
 	//URLを返す
-	public String getintro(){
+	public String getIntro(){
 		return this.intro;
 	}
 
 	//返却予定日をセットする
-	public void setreturnYDate(String Date){
+	public void setReturnYDate(String Date){
 		this.returnYDate=Date;
 	}
 
 	//返却予定を所得する
-	public String getreturnYDate(){
+	public String getReturnYDate(){
 		return this.returnYDate;
 	}
 }
