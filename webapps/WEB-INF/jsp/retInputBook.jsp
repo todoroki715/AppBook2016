@@ -26,27 +26,27 @@ function back(){
 	<table class="formtable" border=1>
 		<tr>
 		<td style="width:180px;">利用者氏名(社員番号)</td>
-		<td style="width:670px;"><%=retInputForm.getlendAccountName() %>(<%=retInputForm.getlendAccountId() %>)</td>
+		<td style="width:670px;"><%=retInputForm.getLendAccountName() %>(<%=retInputForm.getLendAccountId() %>)</td>
 		</tr>
 		<tr>
 		<td>返却者氏名(社員番号)</td>
-		<td><%=retInputForm.getreturnAccountName() %>(<%=retInputForm.getreturnAccountId() %>)</td>
+		<td><%=retInputForm.getReturnAccountName() %>(<%=retInputForm.getReturnAccountId() %>)</td>
 		</tr>
 		<tr>
 		<td>図書名</td>
-		<td><%=retInputForm.getbookName() %></td>
+		<td><%=retInputForm.getBookName() %></td>
 		</tr>
 		<tr>
 		<td>貸出日</td>
-		<td><%=retInputForm.getlendDate() %></td>
+		<td><%=retInputForm.getLendDate() %></td>
 		</tr>
 		<tr>
 		<td>返却予定日</td>
-		<td><%=retInputForm.getreturnYDate() %></td>
+		<td><%=retInputForm.getReturnYDate() %></td>
 		</tr>
 		<tr>
 		<td>返却日</td>
-		<td><input style="width:100px" type="text" name="returnDate" value="<%=retInputForm.getreturnDate()%>" disabled="disabled" />
+		<td><input style="width:100px" type="text" name="returnDate" value="<%=retInputForm.getReturnDate()%>" disabled="disabled" />
 		<font color="#ff0000" size=1>*本日の日付が自動で返却日になります</font>
 		</td>
 		</tr>

@@ -27,11 +27,11 @@ function back(){
 	<table class="formtable" border=1>
 		<tr>
 		<td style="width:180px;">氏名(社員番号)</td>
-		<td style="width:670px;"><%=lenInputForm.getaccountName() %>(<%=lenInputForm.getaccountId() %>)</td>
+		<td style="width:670px;"><%=lenInputForm.getAccountName() %>(<%=lenInputForm.getAccountId() %>)</td>
 		</tr>
 		<tr>
 		<td>図書名</td>
-		<td><%=lenInputForm.getbookName() %></td>
+		<td><%=lenInputForm.getBookName() %></td>
 		</tr>
 		<tr>
 		<td>返却予定日</td>
