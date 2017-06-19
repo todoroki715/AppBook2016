@@ -23,7 +23,9 @@ public class LenBookService {
 	//エスケープ文字設定
 	public final String escape_word = ";";
 
-
+	/*@List<LenBookDto> doSelectLenBook(String, String )
+	 * 引数からデータベースに該当するものをリスト化して返す
+	 */
 
 	public List<LenBookDto> doSelectLenBook(String bookName, String accountName)
 			throws SQLException, NamingException{

@@ -16,6 +16,10 @@ import jp.co.trans.tech.dto.BookDto;
  */
 public class LenRegService {
 
+
+	/*@BookDto doSelectBookPrimary(String)
+	 * 該当する図書IDの情報を取り出すメソッド
+	 */
 	public BookDto doSelectBookPrimary(String bookId)
 			throws SQLException, NamingException{
 		Connection con = null;
@@ -55,6 +59,9 @@ public class LenRegService {
 		return Dto;
 	}
 
+	/*@int doSelectLenBookConf(String)
+	 * 該当する図書IDが存在するか確認するメソッド
+	 */
 	public int doSelectLenBookConf(String bookId)
 			throws SQLException, NamingException{
 		Connection con = null;
@@ -91,6 +98,11 @@ public class LenRegService {
 		}
 		return count;
 	}
+
+	/*@boolean doInsertLenBook(String, String, String)
+	 * 入力した情報に基づいて貸出処理を行う
+	 * 成功すればtrue,失敗すればfalseを返す
+	 */
 
 	public boolean doInsertLenBook(String accountId, String bookId, String returnYDate)
 			throws SQLException, NamingException{

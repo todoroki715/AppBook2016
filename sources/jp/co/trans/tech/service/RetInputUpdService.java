@@ -16,6 +16,11 @@ import jp.co.trans.tech.dto.RetBookDto;
  */
 
 public class RetInputUpdService {
+
+	/*@RetBookDto doSelectBookHistory(String)
+	 *図書の貸出状態を確認するメソッド
+	 *確認した図書のデータを返す
+	 */
 	public RetBookDto doSelectBookHistory(String lendId)
 		throws SQLException, NamingException{
 
@@ -73,6 +78,9 @@ public class RetInputUpdService {
 		return Dto;
 	}
 
+	/*@int doSelectLenBookConf(int)
+	 * 貸出IDのものが存在するか確認するメソッド
+	 */
 	public int doSelectLenBookConf(int lendId)
 			throws SQLException, NamingException{
 		int count = 0;
@@ -109,6 +117,11 @@ public class RetInputUpdService {
 		}
 		return count;
 	}
+
+	/*@boolean doRetUpdateBook(int, String)
+	 * 返却処理を行うメソッド
+	 * 返却処理に成功したかどうかを返す
+	 */
 
 	public boolean doRetUpdateBook(int lendId, String accountId)
 			throws SQLException, NamingException{
