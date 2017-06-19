@@ -106,10 +106,10 @@ public class LenBookService {
 
 			//SQL実行
 			rs = state.executeQuery(sb.toString());
-			int count = 0;
+			int count;
 
 			//要素があればリストに追加する
-			while(rs.next()){
+			for(count = 0; rs.next(); count++){
 				Form.add(new LenBookDto());
 				Form.get(count).setBookId(rs.getString("BOOK_ID"));
 				Form.get(count).setBookName(rs.getString("BOOK_NAME"));
@@ -119,7 +119,6 @@ public class LenBookService {
 				Form.get(count).setLendDate(rs.getDate("LEND_DATE"));
 				Form.get(count).setReturnYDate(rs.getDate("RETURN_Y_DATE"));
 				Form.get(count).setUpdateDate(rs.getDate("UPDATE_DATE"));
-				count++;
 			}
 
 

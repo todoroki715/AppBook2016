@@ -35,7 +35,7 @@ function lenhis(){
 			<tr>
 				<th colspan="2"><hr size="1px" color="#000000"></th>
 			</tr>
-			<%if(loginTopForm.getmasterFlg() == 1) {%>
+			<%if(loginTopForm.getMasterFlg() == 1) {%>
 			<tr>
 				<th style="text-align: left">貸出履歴参照</th>
 			</tr>

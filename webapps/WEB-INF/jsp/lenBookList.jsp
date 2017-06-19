@@ -4,9 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%!
 	public String nullcheck(String str){
-	if(str == null){
-		return "";
-	}
+		if(str == null){
+			return "";
+		}
 	return str;
 	}
 %>
@@ -72,17 +72,16 @@ function ret(){
 		<%! int i; %>
 		<%for(i = 0; i < lenBookForm.getList().size(); i++){ %>
 		<tr>
-			<td><%= lenBookForm.getList().get(i).getbookId() %></td>
-			<td><%= lenBookForm.getList().get(i).getbookName() %></td>
-			<td><%= nullcheck(lenBookForm.getList().get(i).getlendAccountId()) %></td>
-			<td><%= nullcheck(lenBookForm.getList().get(i).getaccountName()) %></td>
-			<td><%= nullcheck(lenBookForm.getList().get(i).getlendDateDisp()) %></td>
-			<td><%= nullcheck(lenBookForm.getList().get(i).getreturnYDateDisp()) %></td>
-			<%if(lenBookForm.getList().get(i).getaccountName() == null
-			|| lenBookForm.getList().get(i).getaccountName().equals("") == true){ %>
-				<td><button type="submit" class="listBT" name="bookIdL" value="<%= lenBookForm.getList().get(i).getbookId() %>" onclick='len()'>貸出</button></td>
+			<td><%= lenBookForm.getList().get(i).getBookId() %></td>
+			<td><%= lenBookForm.getList().get(i).getBookName() %></td>
+			<td><%= nullcheck(lenBookForm.getList().get(i).getLendAccountId()) %></td>
+			<td><%= nullcheck(lenBookForm.getList().get(i).getAccountName()) %></td>
+			<td><%= nullcheck(lenBookForm.getList().get(i).getLendDateDisp()) %></td>
+			<td><%= nullcheck(lenBookForm.getList().get(i).getReturnYDateDisp()) %></td>
+			<%if(lenBookForm.getList().get(i).getAccountName() == null || lenBookForm.getList().get(i).getAccountName().equals("") == true){ %>
+				<td><button type="submit" class="listBT" name="bookIdL" value="<%= lenBookForm.getList().get(i).getBookId() %>" onclick='len()'>貸出</button></td>
 			<%} else{ %>
-				<td><button type="submit" class="listBT" name="bookIdR" value="<%= lenBookForm.getList().get(i).getlendId() %>" onclick='ret()'>返却</button></td>
+				<td><button type="submit" class="listBT" name="bookIdR" value="<%= lenBookForm.getList().get(i).getLendId() %>" onclick='ret()'>返却</button></td>
 			<%} %>
 		</tr>
 		<%} %>

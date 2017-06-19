@@ -77,7 +77,7 @@ public class LenBookDto {
 	}
 
 	//貸出をしたアカウントIDを返す
-	public String getlendAccountId(){
+	public String getLendAccountId(){
 		return this.lendAccountId;
 	}
 

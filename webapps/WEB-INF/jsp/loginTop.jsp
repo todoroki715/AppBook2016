@@ -33,7 +33,7 @@
 	<form name='form'>
 		<div class="loginform">
 			<h3>ログインID/パスワードを入力してログインしてください。</h3>
-			<font color="ff0000"><jsp:getProperty property="errorMsg" name="loginTopForm"/></font>
+			<font color="ff0000"><%=loginTopForm.getErrorMsg() %></font>
 			<table class="input">
 				<tr>
 					<th>ログインID&nbsp;:&nbsp;</th>
