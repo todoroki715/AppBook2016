@@ -53,6 +53,10 @@ public class LenRegService {
 				Dto.setIntro(rs.getString("INTRO"));
 				Dto.setLendFlg(rs.getInt("LEND_FLG"));
 			}
+
+			if(Dto.getBookId().equals("") == true){
+				Dto = null;
+			}
 		}finally{
 			closeSet(con, state, rs);
 		}

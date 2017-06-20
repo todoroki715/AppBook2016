@@ -35,7 +35,7 @@ function back(){
 		</tr>
 		<tr>
 		<td>返却予定日</td>
-		<td><input style="width:100px" type="text" name="returnYDate"/>
+		<td><input style="width:100px" type="text" name="returnYDate" maxlength='10' value="<%= lenInputForm.getReturnYDate()%>"/>
 		<font color="ff0000" size=1>*今日以降の日付を入力してください。</font><br>
 		<font size=1>YYYY/MM/DDの形式で入力してください。</font>
 		</td>

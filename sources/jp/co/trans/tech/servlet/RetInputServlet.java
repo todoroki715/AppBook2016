@@ -59,16 +59,16 @@ public class RetInputServlet extends HttpServlet{
 			RetInputForm.setReturnAccountName(LoginTopForm.getAccountName());
 
 			//ボタンからデータ所得
-			String bookId = request.getParameter("bookIdR");
+			String lendId = request.getParameter("bookIdR");
 
 
 			RetInputUpdService Service = new RetInputUpdService();
 			RetBookDto Dto = new RetBookDto();
 
 			//貸出履歴に存在するか確認
-			Dto = Service.doSelectBookHistory(bookId);
+			Dto = Service.doSelectBookHistory(lendId);
 			if(Dto == null){
-				RetInputForm.setErrorMsg("データベースにエラーがあります。システム管理者に連絡してください。");
+				RetInputForm.setErrorMsg("データベース内のデータが不正です。システム管理者に連絡してください。");
 
 			}else{
 				//所得できたらデータ保存

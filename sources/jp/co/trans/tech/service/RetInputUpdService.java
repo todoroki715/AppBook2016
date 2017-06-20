@@ -59,10 +59,9 @@ public class RetInputUpdService {
 			//SQL実行
 			rs = state.executeQuery(sb.toString());
 
-			Dto = new RetBookDto();
-
 			//データ所得
 			while(rs.next()){
+				Dto = new RetBookDto();
 				Dto.setBookId(rs.getString("BOOK_ID"));
 				Dto.setBookName(rs.getString("BOOK_NAME"));
 				Dto.setLendId(rs.getInt("LEND_ID"));

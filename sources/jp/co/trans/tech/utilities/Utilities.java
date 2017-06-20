@@ -15,7 +15,7 @@ public class Utilities {
 	//指定の日付書式が妥当であるか判定する
 	public static boolean checkDateValid(String date, String str){
 		SimpleDateFormat SimpleDate = new SimpleDateFormat(str);
-
+		SimpleDate.setLenient(false);
 		try {
 			SimpleDate.parse(date);
 		} catch (ParseException e) {
