@@ -167,7 +167,7 @@ public class LenRegService {
 			num = state.executeUpdate(sb.toString());
 
 			//アップデートできなければロールバック
-			if(num <= 0){
+			if(num != 1){
 				con.rollback();
 				return false;
 			}
@@ -204,7 +204,7 @@ public class LenRegService {
 			num = state.executeUpdate(sb.toString());
 
 			//アップデートできなければロールバック
-			if(num <= 0){
+			if(num != 1){
 				con.rollback();
 				return false;
 			}

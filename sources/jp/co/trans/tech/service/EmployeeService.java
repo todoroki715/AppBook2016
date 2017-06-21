@@ -138,7 +138,7 @@ public class EmployeeService {
 			num = state.executeUpdate(sb.toString());
 
 			//更新失敗すればfalseを返す
-			if(num == 0){
+			if(num != 1){
 				return false;
 			}
 

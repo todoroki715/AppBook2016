@@ -141,7 +141,7 @@ public class RetInputUpdService {
 			ret = state.executeUpdate(sb.toString());
 
 			//削除できなければロールバック
-			if(ret == 0){
+			if(ret != 1){
 				con.rollback();
 				return false;
 			}
@@ -166,7 +166,7 @@ public class RetInputUpdService {
 
 			//SQL実行
 			ret = state.executeUpdate(sb.toString());
-			if(ret == 0){
+			if(ret != 1){
 				con.rollback();
 				return false;
 			}

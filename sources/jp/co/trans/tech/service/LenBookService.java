@@ -121,7 +121,6 @@ public class LenBookService {
 				Form.get(count).setUpdateDate(rs.getDate("UPDATE_DATE"));
 			}
 
-
 		}finally{
 			closeSet(con, state, rs);
 		}
