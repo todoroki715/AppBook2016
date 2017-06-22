@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import jp.co.trans.tech.dto.LenBookDto;
+import jp.co.trans.tech.utilities.Construct;
 import jp.co.trans.tech.utilities.Utilities;
 
 
@@ -20,8 +21,7 @@ import jp.co.trans.tech.utilities.Utilities;
  */
 public class LenBookService {
 
-	//エスケープ文字設定
-	public final String escape_word = ";";
+
 
 	/*@List<LenBookDto> doSelectLenBook(String, String )
 	 * 引数からデータベースに該当するものをリスト化して返す
@@ -60,43 +60,49 @@ public class LenBookService {
 			//空欄かどうか判定する
 			if(Utilities.checkIndispensable(bookName)){
 				boolean escape_flag = false;
+
 				//シングルクォーテーションの変換
+				//もし対処しなければSQLのエラーが発生してシステムエラーとなる
 				bookName = bookName.replace("\'","\'\'");
+
 				//ワイルドカードの判定・変換
 				if(bookName.matches(".*%.*") || bookName.matches(".*％.*")
 						|| bookName.matches(".*_.*") || bookName.matches(".*＿.*")){
 					escape_flag = true;
-					bookName = bookName.replace("%",escape_word+"%");
-					bookName = bookName.replace("％",escape_word+"％");
-					bookName = bookName.replace("_",escape_word+"_");
-					bookName = bookName.replace("＿",escape_word+"＿");
+					bookName = bookName.replace("%",Construct.ESCAPE+"%");
+					bookName = bookName.replace("％",Construct.ESCAPE+"％");
+					bookName = bookName.replace("_",Construct.ESCAPE+"_");
+					bookName = bookName.replace("＿",Construct.ESCAPE+"＿");
 				}
 				sb.append("AND BOK_MST.BOOK_NAME LIKE '%"+bookName+"%' ");
 
 				//エスケープ文字が入っているかどうか
 				if(escape_flag == true){
-					sb.append("ESCAPE '"+escape_word+"' ");
+					sb.append("ESCAPE '"+Construct.ESCAPE+"' ");
 				}
 			}
 			if(Utilities.checkIndispensable(accountName)){
 				boolean escape_flag = false;
+
 				//シングルクォーテーションの変換
+				//もし対処しなければSQLのエラーが発生してシステムエラーとなる
 				accountName = accountName.replace("\'","\'\'");
+
 				//ワイルドカードの判定・変換
 				if(accountName.matches(".*%.*") || accountName.matches(".*％.*")
 						|| accountName.matches(".*_.*") || accountName.matches(".*＿.*")){
 					escape_flag = true;
-					accountName = accountName.replace("%",escape_word+"%");
-					accountName = accountName.replace("％",escape_word+"％");
-					accountName = accountName.replace("_",escape_word+"_");
-					accountName = accountName.replace("＿",escape_word+"＿");
+					accountName = accountName.replace("%",Construct.ESCAPE+"%");
+					accountName = accountName.replace("％",Construct.ESCAPE+"％");
+					accountName = accountName.replace("_",Construct.ESCAPE+"_");
+					accountName = accountName.replace("＿",Construct.ESCAPE+"＿");
 				}
 
 				sb.append("AND EMP_MST.ACCOUNT_NAME LIKE '%"+accountName+"%' ");
 
 				//エスケープ文字が入っているかどうか
 				if(escape_flag == true){
-					sb.append("ESCAPE '"+escape_word+"' ");
+					sb.append("ESCAPE '"+Construct.ESCAPE+"' ");
 				}
 
 			}

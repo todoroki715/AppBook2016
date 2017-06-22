@@ -22,7 +22,9 @@ function back(){
 <body>
 <div class="title"><h1><u>図書返却</u></h1></div>
 <form name="form">
-	<div class="error"><font color="ff0000"><jsp:getProperty property="errorMsg" name="retInputForm"/></font></div>
+	<%if(retInputForm.getErrorMsg().equals("") == false){ %>
+	<div class="error"><font color="ff0000">*<%=retInputForm.getErrorMsg() %></font></div>
+	<%} %>
 	<table class="formtable" border=1>
 		<tr>
 		<td style="width:180px;">利用者氏名(社員番号)</td>

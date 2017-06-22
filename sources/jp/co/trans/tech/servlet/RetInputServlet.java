@@ -36,7 +36,7 @@ public class RetInputServlet extends HttpServlet{
 	 * post要求でアクセスされた場合の処理
 	 * セッションを取りChangePassFormBeanオブジェクトを所得する
 	 * もし取れなければインスタンスを生成する
-	 * その後、パスワード変更画面に移行する
+	 * その後、返却画面に移行する
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		    throws IOException, ServletException{

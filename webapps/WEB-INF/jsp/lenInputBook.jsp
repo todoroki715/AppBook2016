@@ -23,7 +23,9 @@ function back(){
 <body>
 <div class="title"><h1><u>図書貸出</u></h1></div>
 <form name="form">
-	<div class="error"><font color="ff0000"><jsp:getProperty property="errorMsg" name="lenInputForm"/></font></div>
+	<%if(lenInputForm.getErrorMsg().equals("") == false){ %>
+	<div class="error"><font color="ff0000">*<%=lenInputForm.getErrorMsg() %></font></div>
+	<%} %>
 	<table class="formtable" border=1>
 		<tr>
 		<td style="width:180px;">氏名(社員番号)</td>

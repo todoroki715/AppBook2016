@@ -33,7 +33,9 @@
 	<form name='form'>
 		<div class="loginform">
 			<h3>ログインID/パスワードを入力してログインしてください。</h3>
-			<font color="ff0000"><%=loginTopForm.getErrorMsg() %></font>
+			<%if(loginTopForm.getErrorMsg().equals("") == false){ %>
+			<font color="ff0000">*<%=loginTopForm.getErrorMsg() %></font>
+			<%} %>
 			<table class="input">
 				<tr>
 					<th>ログインID&nbsp;:&nbsp;</th>

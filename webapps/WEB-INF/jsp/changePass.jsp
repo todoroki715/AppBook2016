@@ -24,9 +24,9 @@
 	<div class="title"><h1><u>パスワード変更&nbsp;&nbsp;&nbsp;</u></h1></div>
 
 		<div class="changeform">
-
-			<div class="error"><font color="ff0000"><jsp:getProperty property="errorMsg" name="changePassForm"/></font></div>
-
+			<%if(changePassForm.getErrorMsg().equals("") == false){ %>
+			<div class="error"><font color="ff0000">*<%=changePassForm.getErrorMsg() %></font></div>
+			<%} %>
 			<table class="pass">
 			<tr>
 				<th>ログインID：</th>

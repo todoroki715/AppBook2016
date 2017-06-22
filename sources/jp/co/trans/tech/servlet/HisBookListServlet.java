@@ -10,15 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.co.trans.tech.formbean.ErrorFormBean;
-import jp.co.trans.tech.formbean.RetInputFormBean;
-import jp.co.trans.tech.service.RetInputUpdService;
+import jp.co.trans.tech.formbean.HisBookListFormBean;
+import jp.co.trans.tech.service.HisBookService;
+import jp.co.trans.tech.utilities.Construct;
 
-/*@RetUpdateServletクラス
- * 貸出中の図書に対して返却・削除・更新処理を行う
- * その後完了画面へディスパッチする
- */
+public class HisBookListServlet extends HttpServlet{
 
-public class RetUpdateServlet extends HttpServlet{
 	/*@void doGet(HttpServletRequest, HttpServletResponse)
 	 * get要求でアクセスされた場合の処理
 	 * get要求は承認しないためログイン画面に飛ばす
@@ -32,9 +29,9 @@ public class RetUpdateServlet extends HttpServlet{
 
 	/*@void doPost(HttpServletRequest, HttpServletResponse)
 	 * post要求でアクセスされた場合の処理
-	 * セッションを取りChangePassFormBeanオブジェクトを所得する
+	 * セッションを取りHisBookListFormBeanオブジェクトを所得する
 	 * もし取れなければインスタンスを生成する
-	 * その後、完了画面に移行する
+	 * その後、パスワード変更画面に移行する
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		    throws IOException, ServletException{
@@ -42,42 +39,44 @@ public class RetUpdateServlet extends HttpServlet{
 		//セッションを取る
 		HttpSession session = request.getSession();
 
+		//文字化け防止に文字コード変換
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
 		try{
 			//フォームをセッションから取る
-			RetInputFormBean RetInputForm = (RetInputFormBean) session.getAttribute("retInputForm");
+			HisBookListFormBean hisBookListForm = (HisBookListFormBean) session.getAttribute("hisBookForm");
 
-			//エラーメッセージを初期化
-			RetInputForm.setErrorMsg("");
+			//viewモード所得
+			String view = request.getParameter(Construct.VIEW_MODE);
 
-			RetInputUpdService Service = new RetInputUpdService();
-			int num;
+			//viewモード確認
+			if(view.equals(Construct.MODE_MENU)){
+				hisBookListForm = new HisBookListFormBean();
 
-			//貸出件数検索
-			num = Service.doSelectLenBookConf(RetInputForm.getLendId());
+				//セッションにフォームを保存
+				session.setAttribute("hisBookForm", hisBookListForm);
 
-			//貸出状態でなければ返却済みと判断
-			if(num == 0){
-				RetInputForm.setErrorMsg("既に返却済みの図書の可能性があります。図書貸出・返却画面にて再度ご確認ください。");
-				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/retInputBook.jsp");
-				dispatch.forward(request, response);
-				return;
+			}else if(view.equals(Construct.MODE_HISTORY)){
+				hisBookListForm.setBookName(request.getParameter("bookName"));
+				hisBookListForm.setAccountName(request.getParameter("accountName"));
 			}
 
-			boolean bool;
+			HisBookService Service = new HisBookService();
 
-			//図書の返却・削除・更新を行う
-			bool = Service.doRetUpdateBook(RetInputForm.getLendId(), RetInputForm.getReturnAccountId());
+			//データベースから貸出履歴の情報をリスト化する
+			hisBookListForm.setHisBookList(Service.doSelectHisBook(hisBookListForm.getBookName(), hisBookListForm.getAccountName()) );
 
-			//失敗すればエラーメッセージを出す
-			if(bool == false){
-				RetInputForm.setErrorMsg("返却ができませんでした。お手数ですが、図書貸出・返却画面でご確認の上、再度、返却を行ってください。");
-				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/retInputBook.jsp");
-				dispatch.forward(request, response);
-				return;
+			//エラーメッセージ初期化
+			hisBookListForm.setErrorMsg("");
+
+			//もし貸出履歴の情報を読み込めなければエラーメッセージを出す
+			if(hisBookListForm.getHisBookList().size() == 0){
+				hisBookListForm.setErrorMsg("該当する貸出履歴はありません。");
 			}
 
-			//完了画面にディスパッチ
-			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/regComp.jsp");
+			//図書貸出履歴画面にディスパッチ
+			RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/hisBookList.jsp");
 			dispatch.forward(request, response);
 
 		/*@例外処理

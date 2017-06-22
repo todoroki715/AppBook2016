@@ -53,21 +53,21 @@ function ret(){
 		</table>
 		<input class="searchBT" type="submit" name="searchBT" value="検索" onclick='search()'/>
 	</div>
-
-	<div class="error"><font color="ff0000"><jsp:getProperty property="errorMsg" name="lenBookForm"/></font></div>
-
+<%if(lenBookForm.getErrorMsg().equals("") == false){ %>
+	<div class="error"><font color="ff0000">*<%=lenBookForm.getErrorMsg() %></font></div>
+<%} %>
 	<% if(lenBookForm.getList() != null && lenBookForm.getList().size() != 0){ %>
 
 	<div class="list_div">
 		<table class = "list_table" border=1>
 		<tr class="column">
-			<th style="width:70px;">図書ID</th>
-			<th style="width:720px;">図書名</th>
-			<th style="width:80px;">利用者ID</th>
-			<th style="width:210px;">利用者名</th>
-			<th style="width:90px;">貸出日</th>
-			<th style="width:100px;">返却予定日</th>
-			<th style="width:90px;">貸出・返却</th>
+			<th class="bookId">図書ID</th>
+			<th class="bookName">図書名</th>
+			<th class="lendAccountId">利用者ID</th>
+			<th class="lendAccountName">利用者名</th>
+			<th class="lendDate">貸出日</th>
+			<th class="returnYDate">返却予定日</th>
+			<th class="lenret">貸出・返却</th>
 		</tr>
 		<%! int i; %>
 		<%for(i = 0; i < lenBookForm.getList().size(); i++){ %>

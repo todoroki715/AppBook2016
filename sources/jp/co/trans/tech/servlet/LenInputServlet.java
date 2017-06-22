@@ -36,9 +36,9 @@ public class LenInputServlet extends HttpServlet{
 
 	/*@void doPost(HttpServletRequest, HttpServletResponse)
 	 * post要求でアクセスされた場合の処理
-	 * セッションを取りChangePassFormBeanオブジェクトを所得する
+	 * セッションを取りLenInputFormBeanオブジェクトを所得する
 	 * もし取れなければインスタンスを生成する
-	 * その後、パスワード変更画面に移行する
+	 * その後、貸出画面に移行する
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		    throws IOException, ServletException{

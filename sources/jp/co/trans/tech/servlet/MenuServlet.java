@@ -13,6 +13,7 @@ import jp.co.trans.tech.dto.EmployeeDto;
 import jp.co.trans.tech.formbean.ErrorFormBean;
 import jp.co.trans.tech.formbean.LoginTopFormBean;
 import jp.co.trans.tech.service.EmployeeService;
+import jp.co.trans.tech.utilities.Construct;
 import jp.co.trans.tech.utilities.Utilities;
 
 /*@MenuServletクラス
@@ -65,7 +66,7 @@ public class MenuServlet extends HttpServlet{
 			String pass = request.getParameter("pass");
 			String view = request.getParameter("vmode");
 
-			if(view.equals("LENBOOK")){
+			if(view.equals(Construct.MODE_LEN) || view.equals(Construct.MODE_HISTORY)){
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");
 				dispatch.forward(request, response);
 				return;
