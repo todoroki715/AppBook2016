@@ -18,7 +18,7 @@ import jp.co.trans.tech.utilities.Utilities;
 public class HisBookService {
 
 	/*@List<HisBookDto> doSelectHisBook(String, String)
-	 *
+	 * 貸出履歴テーブルから今まで貸し出されたデータをリスト化するメソッド
 	 */
 	public List<HisBookDto> doSelectHisBook(String bookName, String accountName)
 			throws SQLException, NamingException{
