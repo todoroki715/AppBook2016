@@ -30,6 +30,7 @@
 </script>
 
 <body>
+<jsp:include page="header.jsp" />
 	<form name='form'>
 		<div class="loginform">
 			<h3>ログインID/パスワードを入力してログインしてください。</h3>
@@ -59,5 +60,6 @@
 			<input class="changeBT" type="submit" name="changeBT" value="パスワード変更" onclick='change()'/>
 		</div>
 	</form>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

@@ -21,6 +21,7 @@ function lenhis(){
 </script>
 
 <body>
+<jsp:include page="header.jsp" />
 <form name="form">
 <div class="title"><h1><u>図書管理システムメニュー&nbsp;&nbsp;&nbsp;</u></h1></div>
 	<div class="menuform">
@@ -51,5 +52,6 @@ function lenhis(){
 		<input type="hidden" name="vmode" value="MENU"/>
 	</div>
 </form>
+<jsp:include page="footer.jsp" />
 </body>
 </html>
