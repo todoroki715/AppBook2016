@@ -12,10 +12,14 @@
 <body>
 <form action = "./logout.do" method = "post">
 <div class="header">
-<div>
-<img  height="40" width="90" alt="" src="./image/image2.png" align="left"/>
-</div>
-	<table class="login" align="right">
+	<div class="header_left">
+	<img class="logo" alt="" src="./image/image2.png" align="left"/>
+	</div>
+	<div class="header_left">
+	<h1 class="titlelogo"><label>TCT Library</label></h1>
+	</div>
+	<div class="header_logout">
+	<table class="login">
 		<tbody>
 		<%if(session.getAttribute("GREETING_NAME") != null){%>
 		<tr class="cell"><td>
@@ -28,6 +32,7 @@
 		<%} %>
 		</tbody>
 	</table>
+	</div>
 </div>
 </form>
 </body>

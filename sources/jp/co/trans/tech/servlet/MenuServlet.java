@@ -55,10 +55,12 @@ public class MenuServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		    throws IOException, ServletException{
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 
 		try{
-
+			if(request.isRequestedSessionIdValid() == false){
+				throw new Exception("サーバー内でエラーが発生しました。再度接続してください");
+			}
 			LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
 
 			//所得したパラメータからIDとパスワードを所得する

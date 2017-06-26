@@ -27,6 +27,7 @@
 	}
 </script>
 <body>
+<jsp:include page="header.jsp" />
 <form name="form">
 <input type="hidden" name="vmode" value="HISBOOK"/>
 <div class="title"><h1><u>図書貸出履歴&nbsp;&nbsp;&nbsp;</u></h1></div>
@@ -78,5 +79,6 @@
 <%} %>
 <div class = "back"><input class="backBT" type="submit" name="backBT" value="戻る" onclick='back()' /></div>
 </form>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

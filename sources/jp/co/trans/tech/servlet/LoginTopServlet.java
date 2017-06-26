@@ -24,6 +24,10 @@ public class LoginTopServlet extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException{
+		HttpSession session = request.getSession(true);
+		if(session.getAttribute("GREETING_NAME") != null){
+			session.invalidate();
+		}
 
 		this.doPost(request, response);
 		return;
@@ -39,12 +43,11 @@ public class LoginTopServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 		    throws IOException, ServletException{
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 		try{
 			LoginTopFormBean LoginForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
 			if(LoginForm == null){
 				LoginForm = new LoginTopFormBean();
-
 			}
 			LoginForm.setErrorMsg("");
 			session.setAttribute("loginTopForm", LoginForm);

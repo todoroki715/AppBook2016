@@ -16,10 +16,12 @@
 </script>
 
 <body>
+<jsp:include page="header.jsp" />
 <form class="form">
 	<h1 class="message1">パスワードの変更が正常に完了しました。</h1>
 	<h2 class="message2">ログイントップ画面より新しいパスワードでログインできます。</h2>
 	<input class="BT" type="submit" name="loginBT" value="ログイントップに戻る" onclick='logintop()'/>
 </form>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

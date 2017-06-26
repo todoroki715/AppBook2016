@@ -37,6 +37,7 @@ function ret(){
 }
 </script>
 <body>
+<jsp:include page="header.jsp" />
 <form name="form" id="form">
 <input type="hidden" name="vmode" value="LENBOOK"/>
 	<div class="title"><h1><u>図書貸出・返却&nbsp;&nbsp;&nbsp;</u></h1></div>
@@ -91,5 +92,6 @@ function ret(){
 
 	<input class="backBT" type="submit" name="backBT" value="戻る" onclick='back()'/>
 </form>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

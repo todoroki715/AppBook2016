@@ -21,6 +21,7 @@ function back(){
 
 </script>
 <body>
+<jsp:include page="header.jsp" />
 <div class="title"><h1><u>図書貸出</u></h1></div>
 <form name="form">
 	<%if(lenInputForm.getErrorMsg().equals("") == false){ %>
@@ -47,5 +48,6 @@ function back(){
 <div class = "len"><input class="lenBT" type="submit" name="lenBT" value="貸出" onclick='len()' /></div>
 <div class = "back"><input class="backBT" type="submit" name="backBT" value="戻る" onclick='back()' /></div>
 </form>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

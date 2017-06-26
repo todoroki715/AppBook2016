@@ -15,11 +15,13 @@ function back(){
 
 </script>
 <body>
+<jsp:include page="header.jsp" />
 <form name="form">
 <div class="title"><h1><label>処理が正常に完了しました。</label></h1></div>
 
 <input class="backBT" type="submit" name="lenretBT" value="図書貸出・返却画面に戻る" onclick='back()' />
 <input type="hidden" name="vmode" value="COMP"/>
 </form>
+<jsp:include page="footer.jsp" />
 </body>
 </html>

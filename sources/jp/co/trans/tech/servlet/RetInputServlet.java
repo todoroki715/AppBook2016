@@ -42,9 +42,16 @@ public class RetInputServlet extends HttpServlet{
 		    throws IOException, ServletException{
 
 		//セッションを取る
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 
 		try{
+			//もしログイン情報の初期化があればログイン画面へ戻る
+			if(session.getAttribute("GREETING_NAME") == null){
+				session.invalidate();
+				RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");
+				dispatch.forward(request, response);
+			}
+
 			//インスタンスを生成
 			RetInputFormBean RetInputForm = new RetInputFormBean();
 

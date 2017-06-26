@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="footer">
-	Copyright (c) 2013 TransCosmos Technologies Inc. All rights reserved.
+	Copyright (c) 2017 TransCosmos Technologies Inc. All rights reserved.
 </div>
 </body>
 </html>

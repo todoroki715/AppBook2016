@@ -20,6 +20,7 @@
 
 </script>
 <body>
+<jsp:include page="header.jsp" />
 	<form name="form">
 	<div class="title"><h1><u>パスワード変更&nbsp;&nbsp;&nbsp;</u></h1></div>
 
@@ -50,5 +51,6 @@
 		</div>
 		<input class="backBT" type="submit" name="backBT" value="戻る" onclick='back()' />
 	</form>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

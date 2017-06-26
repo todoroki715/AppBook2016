@@ -37,13 +37,20 @@ public class HisBookListServlet extends HttpServlet{
 		    throws IOException, ServletException{
 
 		//セッションを取る
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 
 		//文字化け防止に文字コード変換
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 
 		try{
+			//もしログイン情報の初期化があればログイン画面へ戻る
+			if(session.getAttribute("GREETING_NAME") == null){
+				session.invalidate();
+				RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");
+				dispatch.forward(request, response);
+			}
+
 			//フォームをセッションから取る
 			HisBookListFormBean hisBookListForm = (HisBookListFormBean) session.getAttribute("hisBookForm");
 

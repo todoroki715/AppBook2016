@@ -51,7 +51,7 @@ public class ChangePassCompServlet extends HttpServlet{
 		    throws IOException, ServletException{
 
 		//セッションを取る
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 
 		try{
 			ChangePassFormBean changePassForm = (ChangePassFormBean) session.getAttribute("changePassForm");

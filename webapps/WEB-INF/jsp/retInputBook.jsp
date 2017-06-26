@@ -20,6 +20,7 @@ function back(){
 }
 </script>
 <body>
+<jsp:include page="header.jsp" />
 <div class="title"><h1><u>図書返却</u></h1></div>
 <form name="form">
 	<%if(retInputForm.getErrorMsg().equals("") == false){ %>
@@ -57,5 +58,6 @@ function back(){
 <div class="ret"><input class="retBT" type="submit" name="retBT" value="返却" onclick='ret()' /></div>
 <div class="back"><input class="backBT" type="submit" name="backBT" value="戻る" onclick='back()' /></div>
 </form>
+<jsp:include page="footer.jsp" />
 </body>
 </html>
