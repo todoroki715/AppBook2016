@@ -58,12 +58,32 @@ public class MenuServlet extends HttpServlet{
 		HttpSession session = request.getSession(false);
 
 		try{
+			//セッションタイムアウト感知
+			if(!request.isRequestedSessionIdValid()){
+
+				//今後セッションを利用するため生成する
+				session = request.getSession(true);
+
+				throw new Exception(Construct.SESSION_TIMEOUT);
+			}
+
+			String view = request.getParameter("vmode");
+
+			//もしログイン情報の初期化があればログイン画面へ戻る
+			if((view.equals(Construct.MODE_LEN) || view.equals(Construct.MODE_HISTORY))
+					&& session.getAttribute("GREETING_NAME") == null){
+				session.invalidate();
+				RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");
+				dispatch.forward(request, response);
+				return;
+			}
+
 			LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
 
 			//所得したパラメータからIDとパスワードを所得する
 			String accountId = request.getParameter("accountId");
 			String pass = request.getParameter("pass");
-			String view = request.getParameter("vmode");
+
 
 			if(view.equals(Construct.MODE_LEN) || view.equals(Construct.MODE_HISTORY)){
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");

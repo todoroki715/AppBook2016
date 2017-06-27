@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import jp.co.trans.tech.formbean.ChangePassFormBean;
 import jp.co.trans.tech.formbean.ErrorFormBean;
 import jp.co.trans.tech.service.EmployeeService;
+import jp.co.trans.tech.utilities.Construct;
 import jp.co.trans.tech.utilities.Utilities;
 
 /*@ChangePassCompServretクラス
@@ -54,6 +55,14 @@ public class ChangePassCompServlet extends HttpServlet{
 		HttpSession session = request.getSession(false);
 
 		try{
+			//セッションタイムアウト感知
+			if(!request.isRequestedSessionIdValid()){
+
+				//今後セッションを利用するため生成する
+				session = request.getSession(true);
+
+				throw new Exception(Construct.SESSION_TIMEOUT);
+			}
 
 
 			ChangePassFormBean changePassForm = (ChangePassFormBean) session.getAttribute("changePassForm");

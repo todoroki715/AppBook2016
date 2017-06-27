@@ -59,19 +59,8 @@ public class HisBookService {
 
 				boolean escape_flag = false;
 
-				//シングルクォーテーションの変換
-				//もし対処しなければSQLのエラーが発生してシステムエラーとなる
-				bookName = bookName.replace("\'","\'\'");
-
-				//ワイルドカードの判定・変換
-				if(bookName.matches(".*%.*") || bookName.matches(".*％.*")
-						|| bookName.matches(".*_.*") || bookName.matches(".*＿.*")){
-					escape_flag = true;
-					bookName = bookName.replace("%",Construct.ESCAPE+"%");
-					bookName = bookName.replace("％",Construct.ESCAPE+"％");
-					bookName = bookName.replace("_",Construct.ESCAPE+"_");
-					bookName = bookName.replace("＿",Construct.ESCAPE+"＿");
-				}
+				escape_flag = Utilities.strCheck(bookName);
+				bookName = Utilities.strConvert(bookName);
 				sb.append("BM.BOOK_NAME LIKE '%"+bookName+"%' ");
 
 				//エスケープ文字が入っているかどうか
@@ -84,19 +73,8 @@ public class HisBookService {
 			if(Utilities.checkIndispensable(accountName)){
 				boolean escape_flag = false;
 
-				//シングルクォーテーションの変換
-				//もし対処しなければSQLのエラーが発生してシステムエラーとなる
-				accountName = accountName.replace("\'","\'\'");
-
-				//ワイルドカードの判定・変換
-				if(accountName.matches(".*%.*") || accountName.matches(".*％.*")
-						|| accountName.matches(".*_.*") || accountName.matches(".*＿.*")){
-					escape_flag = true;
-					accountName = accountName.replace("%",Construct.ESCAPE+"%");
-					accountName = accountName.replace("％",Construct.ESCAPE+"％");
-					accountName = accountName.replace("_",Construct.ESCAPE+"_");
-					accountName = accountName.replace("＿",Construct.ESCAPE+"＿");
-				}
+				escape_flag = Utilities.strCheck(accountName);
+				accountName = Utilities.strConvert(accountName);
 				sb.append("(EM_L.ACCOUNT_NAME LIKE '%"+accountName+"%' ");
 
 				//エスケープ文字が入っているかどうか

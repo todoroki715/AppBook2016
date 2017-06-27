@@ -12,6 +12,27 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Utilities {
 
+	public static boolean strCheck(String str){
+
+		if(str.matches(".*%.*") || str.matches(".*％.*")
+				|| str.matches(".*_.*") || str.matches(".*＿.*")){
+			return true;
+		}
+
+		return false;
+	}
+
+	public static String strConvert(String str){
+		//シングルクォーテーションの変換
+		//もし対処しなければSQLのエラーが発生してシステムエラーとなる
+		str = str.replace("\'","\'\'");
+		str = str.replace("%",Construct.ESCAPE+"%");
+		str = str.replace("％",Construct.ESCAPE+"％");
+		str = str.replace("_",Construct.ESCAPE+"_");
+		str = str.replace("＿",Construct.ESCAPE+"＿");
+		return str;
+	}
+
 	//指定の日付書式が妥当であるか判定する
 	public static boolean checkDateValid(String date, String str){
 		SimpleDateFormat SimpleDate = new SimpleDateFormat(str);

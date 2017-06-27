@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import jp.co.trans.tech.formbean.ErrorFormBean;
 import jp.co.trans.tech.formbean.RetInputFormBean;
 import jp.co.trans.tech.service.RetInputUpdService;
+import jp.co.trans.tech.utilities.Construct;
 
 /*@RetUpdateServletクラス
  * 貸出中の図書に対して返却・削除・更新処理を行う
@@ -43,12 +44,21 @@ public class RetUpdateServlet extends HttpServlet{
 		HttpSession session = request.getSession(false);
 
 		try{
+			//セッションタイムアウト感知
+			if(!request.isRequestedSessionIdValid()){
+
+				//今後セッションを利用するため生成する
+				session = request.getSession(true);
+
+				throw new Exception(Construct.SESSION_TIMEOUT);
+			}
 
 			//もしログイン情報の初期化があればログイン画面へ戻る
 			if(session.getAttribute("GREETING_NAME") == null){
 				session.invalidate();
 				RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");
 				dispatch.forward(request, response);
+				return;
 			}
 
 			//フォームをセッションから取る

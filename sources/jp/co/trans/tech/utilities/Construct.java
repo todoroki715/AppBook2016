@@ -8,4 +8,5 @@ public class Construct {
 	public static final String MODE_MENU = "MENU";
 	public static final String MODE_LEN = "LENBOOK";
 	public static final String MODE_HISTORY = "HISBOOK";
+	public static final String SESSION_TIMEOUT = "セッションがタイムアウトしました。お手数ですが、再度接続してください。";
 }

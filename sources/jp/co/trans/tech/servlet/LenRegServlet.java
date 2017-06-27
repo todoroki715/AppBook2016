@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import jp.co.trans.tech.formbean.ErrorFormBean;
 import jp.co.trans.tech.formbean.LenInputFormBean;
 import jp.co.trans.tech.service.LenRegService;
+import jp.co.trans.tech.utilities.Construct;
 import jp.co.trans.tech.utilities.Utilities;
 
 /*@LenRegServletクラス
@@ -43,12 +44,21 @@ public class LenRegServlet extends HttpServlet{
 		HttpSession session = request.getSession(false);
 
 		try{
+			//セッションタイムアウト感知
+			if(!request.isRequestedSessionIdValid()){
+
+				//今後セッションを利用するため生成する
+				session = request.getSession(true);
+
+				throw new Exception(Construct.SESSION_TIMEOUT);
+			}
 
 			//もしログイン情報の初期化があればログイン画面へ戻る
 			if(session.getAttribute("GREETING_NAME") == null){
 				session.invalidate();
 				RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");
 				dispatch.forward(request, response);
+				return;
 			}
 
 			//フォームをセッションから取る
