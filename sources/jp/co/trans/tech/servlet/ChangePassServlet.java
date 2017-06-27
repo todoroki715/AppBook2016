@@ -35,7 +35,7 @@ public class ChangePassServlet extends HttpServlet{
 		    throws IOException, ServletException{
 
 		//セッションを取る
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(false);
 
 		try{
 			//フォームをセッションから取る

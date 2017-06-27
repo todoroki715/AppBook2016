@@ -33,7 +33,7 @@ public class LoginOutServlet extends HttpServlet{
 		    throws IOException, ServletException{
 
 		//セッションを取る
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		try{
 			session.invalidate();
 

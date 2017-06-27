@@ -37,7 +37,7 @@ public class HisBookListServlet extends HttpServlet{
 		    throws IOException, ServletException{
 
 		//セッションを取る
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(false);
 
 		//文字化け防止に文字コード変換
 		request.setCharacterEncoding("UTF-8");

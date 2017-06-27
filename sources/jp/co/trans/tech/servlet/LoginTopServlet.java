@@ -25,10 +25,7 @@ public class LoginTopServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException{
 		HttpSession session = request.getSession(true);
-		if(session.getAttribute("GREETING_NAME") != null){
-			session.invalidate();
-		}
-
+		session.invalidate();
 		this.doPost(request, response);
 		return;
 	}

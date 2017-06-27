@@ -38,11 +38,12 @@ public class LenBookListServlet extends HttpServlet{
 		    throws IOException, ServletException{
 
 		//セッションを取る
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(false);
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 
 		try{
+
 			//もしログイン情報の初期化があればログイン画面へ戻る
 			if(session.getAttribute("GREETING_NAME") == null){
 				session.invalidate();

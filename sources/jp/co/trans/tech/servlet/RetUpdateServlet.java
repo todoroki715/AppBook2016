@@ -40,9 +40,10 @@ public class RetUpdateServlet extends HttpServlet{
 		    throws IOException, ServletException{
 
 		//セッションを取る
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(false);
 
 		try{
+
 			//もしログイン情報の初期化があればログイン画面へ戻る
 			if(session.getAttribute("GREETING_NAME") == null){
 				session.invalidate();
