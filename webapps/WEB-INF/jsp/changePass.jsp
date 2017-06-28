@@ -31,19 +31,19 @@
 			<table class="pass">
 			<tr>
 				<th>ログインID：</th>
-				<th><input style="width:100px" type="text" name="accountId" maxlength='6'/></th>
+				<th class="tbox"><input style="width:100px" type="text" name="accountId" maxlength='6'/></th>
 			</tr>
 			<tr>
 				<th>パスワード：</th>
-				<th><input style="width:150px" type="password" name="pass" maxlength='20'/></th>
+				<th class="tbox"><input style="width:150px" type="password" name="pass" maxlength='20'/></th>
 			</tr>
 			<tr>
 				<th>新しいパスワード：</th>
-				<th><input type="password" name="changePass" maxlength='20'/></th>
+				<th class="tbox"><input style="width:150px" type="password" name="changePass" maxlength='20'/></th>
 			</tr>
 			<tr>
 				<th>確認パスワード：</th>
-				<th><input type="password" name="comfPass" maxlength='20'/></th>
+				<th class="tbox"><input style="width:150px" type="password" name="comfPass" maxlength='20'/></th>
 			</tr>
 			</table>
 			<input type="hidden" name="vmode" value="PASS"/>

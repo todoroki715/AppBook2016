@@ -20,12 +20,10 @@ html,body{
 	margin-right: auto;
 }
 .pass{
-	background:#ffffff;
-	width:10%;
-	height:5%;
-	margin-left: 57%;
-	margin-right: 33%;
-	margin-top: 1%;
+	width:160px;
+	height:50px;
+	margin-left: 1115px;
+	margin-top: 10px;
 }
 .BT{
 	width:10%;
@@ -42,4 +40,8 @@ html,body{
 	width:160px;
 	height:50px;
 	font-size:20px;
+}
+
+.tbox{
+	text-align: left;
 }

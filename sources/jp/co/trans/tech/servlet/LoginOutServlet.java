@@ -35,7 +35,9 @@ public class LoginOutServlet extends HttpServlet{
 		//セッションを取る
 		HttpSession session = request.getSession(false);
 		try{
-			session.invalidate();
+			if(session != null){
+				session.invalidate();
+			}
 
 			//ログイン画面にディスパッチ
 			RequestDispatcher dispatch = request.getRequestDispatcher("./login.do");

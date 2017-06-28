@@ -77,19 +77,20 @@ public class MenuServlet extends HttpServlet{
 				dispatch.forward(request, response);
 				return;
 			}
-
+			
 			LoginTopFormBean LoginTopForm = (LoginTopFormBean) session.getAttribute("loginTopForm");
 
 			//所得したパラメータからIDとパスワードを所得する
 			String accountId = request.getParameter("accountId");
 			String pass = request.getParameter("pass");
 
-
 			if(view.equals(Construct.MODE_LEN) || view.equals(Construct.MODE_HISTORY)){
 				RequestDispatcher dispatch = request.getRequestDispatcher("./WEB-INF/jsp/menu.jsp");
 				dispatch.forward(request, response);
 				return;
 			}
+			
+			this.session_reset(request);
 
 			//IDが設定されているか確認
 			if(Utilities.checkIndispensable(accountId) == false){
@@ -191,6 +192,12 @@ public class MenuServlet extends HttpServlet{
 		}
 		return;
 
+	}
+	protected void session_reset(HttpServletRequest request)
+		    throws IOException, ServletException{
+		HttpSession session = request.getSession(false);
+		session.removeAttribute("GREETING_NAME");
+		return;
 	}
 
 

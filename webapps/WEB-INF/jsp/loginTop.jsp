@@ -39,18 +39,18 @@
 			<%} %>
 			<table class="input">
 				<tr>
-					<th>ログインID&nbsp;:&nbsp;</th>
-					<th><input style="width:100px" type="text" name="accountId" maxlength='6'/></th>
+					<td>ログインID&nbsp;:&nbsp;</td>
+					<td class="tbox"><input style="width:100px" type="text" name="accountId" maxlength='6'/></td>
 				</tr>
 				<tr>
-					<th>パスワード&nbsp;:&nbsp;</th>
-					<th><input style="width:150px" type="password" name="pass" maxlength='20'/></th>
+					<td>パスワード&nbsp;:&nbsp;</td>
+					<td class="tbox"><input style="width:150px" type="password" name="pass" maxlength='20'/></td>
 				</tr>
 			</table>
 			<table class="BT">
 				<tr>
-					<th><input class="botton" type="submit" name="loginBT" value="ログイン" onclick='login()'/></th>
-					<th><input class="botton" type="button" name="clearBT" value="クリア" onclick ='IdPassclear()'/></th>
+					<td><input class="botton" type="submit" name="loginBT" value="ログイン" onclick='login()'/></td>
+					<td><input class="botton" type="button" name="clearBT" value="クリア" onclick ='IdPassclear()'/></td>
 				</tr>
 			</table>
 			<input type="hidden" name="vmode" value="LOGIN"/>
